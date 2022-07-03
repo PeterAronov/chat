@@ -4,7 +4,7 @@ const {v4 : uuidv4} = require('uuid')// import single method(v4) from uuid libra
 let fs = require('fs');
 const router = express.Router();
 
-const currentMessagesJson = require("../messages.json");
+const currentMessagesJson = require("../../messages.json");
 let currentMessagesTable = currentMessagesJson.messages;
 
 /////////////GET////////////////////////////
@@ -15,9 +15,19 @@ router.get("/", (req, res) => { //http://localhost:8000/messages/
 
 router.get("/:uniq_id", (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
   const uniq_id = req.params.uniq_id;
-  return res.status(200).json({
-    message: currentMessagesTable.filter((message) => message.uniq_id === uniq_id)[0],
-  });
+  const message = currentMessagesTable.filter((message) => message.uniq_id === uniq_id)
+
+  if(message.length === 0){
+    console.log("matan!", message)
+    return res.status(404).send()
+  }else if(message.length > 1){
+    return res.status(500).send()
+  }else{
+    return res.status(200).json({
+      message : message[0]
+    });
+  }
+
 });
 
 /////////////POST////////////////////////////

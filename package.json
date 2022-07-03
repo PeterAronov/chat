@@ -4,13 +4,17 @@
   "description": "Chat backend",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node index.js"
+    "test": "jest --testTimeout=10000",
+    "start": "node index.js"
   },
   "author": "Peter Aronov",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "jest": "^28.1.2",
+    "supertest": "^6.2.4"
   }
 }

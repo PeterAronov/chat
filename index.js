@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const messagesRoute = require('./routes/messages-routes'); //access to to this file 
+const messagesRoute = require('./api/messages/messages'); //access to to this file 
 
 const app = express();
 const port = 8000;
@@ -14,3 +14,6 @@ app.use("/messages", messagesRoute);//every request for /messages rout will go t
 app.listen(port, '127.0.0.1', () => {
   console.log(`application start at ${port}`);
 });
+
+
+module.exports = app;
