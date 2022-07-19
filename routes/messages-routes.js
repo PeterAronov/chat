@@ -13,18 +13,18 @@ router.get("/", (req, res) => { //http://localhost:8000/messages/
   return res.status(200).json(currentMessagesJson);
 });
 
-router.get("/:uniq_id", (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
-  const uniq_id = req.params.uniq_id;
+router.get("/:id", (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
+  const id = req.params.id;
   return res.status(200).json({
-    message: currentMessagesTable.filter((message) => message.uniq_id === uniq_id)[0],
+    message: currentMessagesTable.filter((message) => message.id === id)[0],
   });
 });
 
 /////////////POST////////////////////////////
 
 router.post("/", (req, res) => { //http://localhost:8000/messages/
-  //const id = parseInt(currentMessagesTable[currentMessagesTable.length - 1].uniq_id) + 1; // and then id: String(id)
-  var newMessage = {text: req.body.text, uniq_id: uuidv4(), time: new Date().toLocaleString() ,user_name: req.body.user_name}; // Make new var tweet and 
+  //const id = parseInt(currentMessagesTable[currentMessagesTable.length - 1].id) + 1; // and then id: String(id)
+  const newMessage = {text: req.body.text, id: uuidv4(), time: new Date().toLocaleString() ,user_name: req.body.user_name}; // Make new const tweet and 
   currentMessagesTable.push(newMessage);
 
   saveUpdatedMessagesToJsonFile(req, res);
@@ -32,11 +32,11 @@ router.post("/", (req, res) => { //http://localhost:8000/messages/
 
 /////////////PUT////////////////////////////
 
-router.put("/:uniq_id", (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
-  const uniq_id = req.params.uniq_id;
+router.put("/:id", (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
+  const id = req.params.id;
   const updatedMessageText = req.body.text;
-  const index = currentMessagesTable.map((message) => message.uniq_id).indexOf(uniq_id);
-  //console.log(currentMessagesTable.map((message) => message.uniq_id));
+  const index = currentMessagesTable.map((message) => message.id).indexOf(id);
+  //console.log(currentMessagesTable.map((message) => message.id));
   if(index !== -1) {
     currentMessagesTable[index].text = updatedMessageText;
     saveUpdatedMessagesToJsonFile(req, res);
@@ -45,9 +45,9 @@ router.put("/:uniq_id", (req, res) => { //http://localhost:8000/messages/88ab2e9
 
 /////////////DELETE////////////////////////////
 
-router.delete("/:uniq_id", (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
-  const uniq_id = req.params.uniq_id;
-  const index = currentMessagesTable.map((message) => message.uniq_id).indexOf(uniq_id);
+router.delete("/:id", (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
+  const id = req.params.id;
+  const index = currentMessagesTable.map((message) => message.id).indexOf(id);
   if(index !== -1) {
     currentMessagesTable.splice(index, 1); // removes 1 element at the given index
     saveUpdatedMessagesToJsonFile(req, res);
@@ -57,7 +57,7 @@ router.delete("/:uniq_id", (req, res) => { //http://localhost:8000/messages/88ab
 ///////////////////////////////////////////////
 
 function saveUpdatedMessagesToJsonFile(req, res) {
-  var currentMessagesTableJson= {messages: currentMessagesTable}
+  const currentMessagesTableJson= {messages: currentMessagesTable}
 
   console.log(currentMessagesTableJson);
   console.log(JSON.stringify(currentMessagesTableJson, null, 2));//makes the json look much better
