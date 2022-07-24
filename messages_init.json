@@ -1,0 +1,40 @@
+{
+    "messages": [
+      {
+        "text": "Hey Tom how are you?",
+        "id": "9155cb41-e787-457d-ba21-14ea0f2d52ff",
+        "time": "7/3/2022, 5:29:05 AM",
+        "user_name": "Peter"
+      },
+      {
+        "text": "I'm fine what are you doing?",
+        "id": "88ab2e95-1955-482e-9107-bf2ae8825baf",
+        "time": "7/3/2022, 5:29:45 AM",
+        "user_name": "Tom"
+      },
+      {
+        "text": "Writing some code, finishig in a few minutes. What about you?",
+        "id": "1472c331-454d-4473-8c4e-ef58b4f22552",
+        "time": "7/3/2022, 5:30:14 AM",
+        "user_name": "Peter"
+      },
+      {
+        "text": "Cool man... just came from the beach heading to a couple of friends, wanna join?",
+        "id": "8c912fff-543e-48f2-8a6e-b788a91fbaf0",
+        "time": "7/3/2022, 5:30:25 AM",
+        "user_name": "Tom"
+      },
+      {
+        "text": "Yeah sure, i will join you in about a hour, cool?",
+        "id": "ad31d811-b728-4d6c-96fc-035c9f758e9f",
+        "time": "7/3/2022, 5:30:45 AM",
+        "user_name": "Peter"
+      },
+      {
+        "text": "Yes sure, we'll be in touch!",
+        "id": "50840ccf-8798-4a63-a969-337c828c61b5",
+        "time": "7/3/2022, 5:31:20 AM",
+        "user_name": "Tom"
+      }
+    ]
+  }
