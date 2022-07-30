@@ -1,10 +1,11 @@
 // test() function isn't being loaded in with anything like a require.
 // jest provides the test() function as a global env
 
+require('dotenv').config({ path: './config/test.env' }); // Default: path.resolve(process.cwd(), '.env')
 const supertest = require("supertest");
 const server = require("../app");
 const status = require('http-status');
-const messagesManager = require('../api/messages/messages_manager');
+const messagesFileService = require('../services/messages_file_service');
 const messagesJsonInit = require("../messages_init.json");
 request = supertest(server);
 
@@ -12,16 +13,17 @@ const messagesJsonPath = process.env.MESSAGES_JSON_PATH;
 
 /*
 beforeAll(() => {
-    messagesManager.writeMessagesToJsonFile(null, messagesJsonInit.messages, messagesJsonPath);
+    messagesFileService.writeMessagesToJsonFile(null, messagesJsonInit.messages, messagesJsonPath);
 });
 */
 
 describe("Messages", () => {
     describe("GET /", () => {
         it("Should return 200 OK", async () => {
+            expect.assertions(1);
             try {
                 const message = await request.get("/messages").expect(status.OK);
-                expect(message.status).toBe(5);
+                expect(message.status).toBe(status.OK);
             } catch (error) {
                 console.log(error)
             }
@@ -36,15 +38,11 @@ describe("Messages", () => {
             const message = await request.get("/messages/xyz").expect(status.NOT_FOUND);
         });
     });
-
+    /*
     describe("POST /", () => {
         it("Should return 200 OK", async () => {
-            try {
                 const message = await request.get("/messages").expect(status.OK);
                 expect(message.status).toBe(5);
-            } catch (error) {
-                console.log(error)
-            }
         });
     });
 
@@ -70,5 +68,5 @@ describe("Messages", () => {
         });
     });
 
-
+   */
 });
