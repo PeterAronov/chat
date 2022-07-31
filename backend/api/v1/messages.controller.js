@@ -1,12 +1,13 @@
 const { v4: uuidv4 } = require('uuid');
 const status = require('http-status');
-const messagesFileService = require('../services/messages.file.service');
+const messagesFileService = require('./messages.file.service');
 const messagesJson = require("../../messages.json");
 
 let messages = messagesJson.messages;
 const messagesJsonPath = process.env.MESSAGES_JSON_PATH;
 
 const getAllMessages = (req, res) => { //http://localhost:8000/messages/
+    console.log(messages);
     return res.status(status.OK).json(messagesJson)
 };
 
@@ -28,7 +29,7 @@ const getSingelMessage = (req, res) => { //http://localhost:8000/messages/88ab2e
 const postNewMessage = (req, res) => { //http://localhost:8000/messages/
     const { text, user_name } = req.body;
 
-    const newMessage = { text, id: uuidv4(), time: new Date().toLocaleString(), user_name }; // Make new const tweet and 
+    const newMessage = { text, id: uuidv4(), time: new Date().toLocaleString(), user_name };
     messages.push(newMessage);
 
     messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
@@ -37,7 +38,7 @@ const postNewMessage = (req, res) => { //http://localhost:8000/messages/
 const updateMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
     const { id } = req.params;
     const { text: newText } = req.body;
-    const index = messages.map((message) => message.id).indexOf(id);
+    const index = messages.findIndex((message) => message.id === id);
 
     if (index !== -1) {
         messages[index].text = newText;
@@ -49,7 +50,7 @@ const updateMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-
 
 const deleteMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
     const { id } = req.params;
-    const index = messages.map((message) => message.id).indexOf(id);
+    const index = messages.findIndex((message) => message.id === id);
 
     if (index !== -1) {
         messages.splice(index, 1); // removes 1 element at the given index
