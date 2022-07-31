@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const status = require('http-status');
-const messagesFileService = require('../services/messages_file_service');
-const messagesJson = require("../messages.json");
+const messagesFileService = require('../services/messages.file.service');
+const messagesJson = require("../../messages.json");
 
 let messages = messagesJson.messages;
 const messagesJsonPath = process.env.MESSAGES_JSON_PATH;
@@ -15,7 +15,7 @@ const getSingelMessage = (req, res) => { //http://localhost:8000/messages/88ab2e
     const message = messages.filter((message) => message.id === id);
 
     if (message.length === 0) {
-        return res.status(status.NOT_FOUND).send()
+        return res.status(status.NOT_FOUND).json({ failure: "Message ID wasn't found. Getting was failed" });
     } else if (message.length > 1) {
         return res.status(status.INTERNAL_SERVER_ERROR).send()
     } else {
@@ -43,7 +43,7 @@ const updateMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-
         messages[index].text = newText;
         messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
     } else {
-        res.status(status.INTERNAL_SERVER_ERROR).json({ failure: "writing to file was failed" });
+        res.status(status.NOT_FOUND).json({ failure: "Message ID wasn't found. Updating was failed" });
     }
 };
 
@@ -55,7 +55,7 @@ const deleteMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-
         messages.splice(index, 1); // removes 1 element at the given index
         messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
     } else {
-        res.status(status.INTERNAL_SERVER_ERROR).json({ failure: "writing to file was failed" });
+        res.status(status.NOT_FOUND).json({ failure: "Message ID wasn't found. Deleting was failed" });
     }
 };
 
