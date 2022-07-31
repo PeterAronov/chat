@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const messagesRoute = require('./api/messages/messages_router'); // Access to to this file 
+const messagesRoute = require('./api/routes/messages.router'); // Access to to this file 
 
 const app = express();
 

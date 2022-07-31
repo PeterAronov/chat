@@ -5,8 +5,8 @@ require('dotenv').config({ path: './config/test.env' }); // Default: path.resolv
 const supertest = require("supertest");
 const server = require("../app");
 const status = require('http-status');
-const messagesFileService = require('../services/messages_file_service');
-const messagesJsonInit = require("../messages_init.json");
+const messagesFileService = require('../api/services/messages.file.service');
+const messagesJsonInit = require("../messages.init.json");
 request = supertest(server);
 
 const messagesJsonPath = process.env.MESSAGES_JSON_PATH;
