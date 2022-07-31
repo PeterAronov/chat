@@ -52,7 +52,7 @@ const deleteMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-
     const { id } = req.params;
     const index = messages.findIndex((message) => message.id === id);
 
-    if (index !== -1) {
+    if (index !== -1) {  // matan peter filter
         messages.splice(index, 1); // removes 1 element at the given index
         messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
     } else {

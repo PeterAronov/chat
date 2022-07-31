@@ -1,7 +1,6 @@
 const getAllMessages = async () => {
     try {
         const response = await axios.get('/messages');
-        console.log(response.data);
         displayAllMessages(response.data.messages);
     } catch (error) {
         console.error(error);
