@@ -7,7 +7,6 @@ let messages = messagesJson.messages;
 const messagesJsonPath = process.env.MESSAGES_JSON_PATH;
 
 const getAllMessages = (req, res) => { //http://localhost:8000/messages/
-    console.log(messages);
     return res.status(status.OK).json(messagesJson)
 };
 

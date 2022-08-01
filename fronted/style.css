@@ -69,3 +69,21 @@
   .message-body {
     font-size: 20px;
   }
+
+  .messages .message-container:hover{
+    background: rgb(213, 210, 210);
+}
+
+.deleteMessage{ 
+  position: relative;
+  float: right;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+  font-size: 20px;
+}
+
+.deleteMessage:hover{
+  background-color: #f44336;
+  color: white;
+}
