@@ -80,6 +80,10 @@ const userLogin = () => {
     const loginDiv = document.getElementById("login-chat");
     loginDiv.style.display = "none";
     document.getElementsByClassName('message-container')[0].style.display = "block";
+
+    const messageTextDiv = document.getElementById("new-message");
+    messageTextDiv.placeholder = userName+ " Say something . . ."
+
     setInterval(getAllMessages, 500);
 }
 
@@ -90,7 +94,7 @@ const addNewMessage = () => {
         alert("Please enter a message");
         return;
     }
-
+    
     postMessage(userName, messageText);
     document.getElementById("new-message").value = "";
 }

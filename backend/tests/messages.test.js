@@ -5,25 +5,15 @@ require('dotenv').config({ path: './config/test.env' }); // Default: path.resolv
 const supertest = require("supertest");
 const server = require("../app");
 const status = require('http-status');
-const messagesFileService = require('../api/services/messages.file.service');
-const messagesJsonInit = require("../messages.init.json");
 request = supertest(server);
-
-const messagesJsonPath = process.env.MESSAGES_JSON_PATH;
-
-/*
-beforeAll(() => {
-    messagesFileService.writeMessagesToJsonFile(null, messagesJsonInit.messages, messagesJsonPath);
-});
-*/
 
 describe("Messages", () => {
     describe("GET /", () => {
         it("Should return 200 OK", async () => {
             expect.assertions(1);
             try {
-                const message = await request.get("/messages").expect(status.OK);
-                expect(message.status).toBe(status.OK);
+                const messages = await request.get("/messages").expect(status.OK);
+                expect(messages.status).toBe(status.OK);
             } catch (error) {
                 console.log(error)
             }
@@ -38,35 +28,75 @@ describe("Messages", () => {
             const message = await request.get("/messages/xyz").expect(status.NOT_FOUND);
         });
     });
-    /*
+
     describe("POST /", () => {
+        let messageId = "";
+
         it("Should return 200 OK", async () => {
-                const message = await request.get("/messages").expect(status.OK);
-                expect(message.status).toBe(5);
+            const message = await request
+                .post("/messages")
+                .send({
+                    user_name: "Tom",
+                    text: "Hello World"
+                }).expect(status.OK);
         });
-    });
+
+        it("Should check if the last message is what we sent", async () => {
+            const messages = await request.get("/messages").expect(status.OK);
+            const messagesLength = messages.body.messages.length - 1;
+            messageId = messages.body.messages[messagesLength].id;
+            expect(messages.body.messages[messagesLength].text).toBe("Hello World");
+        })
+
+        it("Should delete the last message sent", async () => {
+            const messages = await request.delete("/messages/" + messageId).expect(status.OK);
+        })
+    }
+    );
+
 
     describe("PUT /", () => {
-        it("Should return 200 OK", async () => {
-            try {
-                const message = await request.get("/messages").expect(status.OK);
-                expect(message.status).toBe(5);
-            } catch (error) {
-                console.log(error)
-            }
+        let messagesArray = [];
+        let textOld = "";
+        let messagesLength = 0;
+        let lastMessageId = "";
+        const textNew = "This is a test";
+
+        it("Should receive all the messages", async () => {
+            const messages = await request.get("/messages").expect(status.OK);
+            messagesArray = messages.body.messages;
+            messagesLength = messagesArray.length - 1;
+            textOld = messagesArray[messagesLength].text;
+            lastMessageId = messagesArray[messagesLength].id;
+        })
+
+        it("Should change the text of the last message", async () => {
+            const message = await request
+                .put("/messages/" + lastMessageId)
+                .send({
+                    text: textNew
+                })
+                .expect(status.OK);
+        })
+
+        it("Should check if the text did changed", async () => {
+            const message = await request.get("/messages/" + lastMessageId).expect(status.OK);
+            expect(message.body.message.text).toBe(textNew);
+        });
+
+        it("Should change the text of the last message back", async () => {
+            const message = await request
+                .put("/messages/" + lastMessageId)
+                .send({
+                    text: textOld
+                })
+                .expect(status.OK);
+        })
+
+        it("Should check if the text did changed back", async () => {
+            const message = await request.get("/messages/" + lastMessageId).expect(status.OK);
+            expect(message.body.message.text).toBe(textOld);
         });
     });
-
-    describe("DELETE /", () => {
-        it("Should return 200 OK", async () => {
-            try {
-                const message = await request.get("/messages").expect(status.OK);
-                expect(message.status).toBe(5);
-            } catch (error) {
-                console.log(error)
-            }
-        });
-    });
-
-   */
-});
+}
+);
