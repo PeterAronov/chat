@@ -87,3 +87,19 @@
   background-color: #f44336;
   color: white;
 }
+
+#login-chat {
+  width: 250px; /* 45% of the entire body */
+  margin: 20px auto;
+  height: 40%; /* My addidtion - makes the same height and size dynamiclly  */
+  overflow: scroll;
+  
+  border: 1px solid black;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#user-name {
+  width: 70%;
+}

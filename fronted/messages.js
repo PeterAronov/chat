@@ -1,3 +1,5 @@
+let userName = "";
+
 const getAllMessages = async () => {
     try {
         const response = await axios.get('/messages');
@@ -7,10 +9,10 @@ const getAllMessages = async () => {
     }
 }
 
-const postMessage = async () => {
+const postMessage = async (userName, messageText) => {
     const newMessage = {
-        user_name: "Tom",
-        text: "Relax"
+        user_name: userName,
+        text: messageText
     };
 
     try {
@@ -67,4 +69,28 @@ const addDeleteButton = (divMessageContainer, messageId) => {
     };
 }
 
-setInterval(getAllMessages, 1000);
+const userLogin = () => {
+    const user = document.getElementById("user-name").value;
+
+    if (user === "") {
+        alert("Please enter a user name");
+        return;
+    }
+    userName = user;
+    const loginDiv = document.getElementById("login-chat");
+    loginDiv.style.display = "none";
+    document.getElementsByClassName('message-container')[0].style.display = "block";
+    setInterval(getAllMessages, 500);
+}
+
+const addNewMessage = () => { 
+    const messageText = document.getElementById("new-message").value;
+
+    if (messageText === "") {
+        alert("Please enter a message");
+        return;
+    }
+
+    postMessage(userName, messageText);
+    document.getElementById("new-message").value = "";
+}
