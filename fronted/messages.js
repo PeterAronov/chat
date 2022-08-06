@@ -64,9 +64,7 @@ const addDeleteButton = (divMessageContainer, messageId) => {
     span.className = "deleteMessage";
     span.appendChild(txt);
     divMessageContainer.appendChild(span);// adds child to li
-    span.onclick = () => { // writing deleteMessage(messageId) will call the CB immediately
-        deleteMessage(messageId)
-    };
+    span.onclick = () => deleteMessage(messageId) // writing deleteMessage(messageId) will call the CB immediately
 }
 
 const userLogin = () => {
