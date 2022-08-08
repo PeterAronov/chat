@@ -25,7 +25,7 @@ const getSingelMessage = (req, res) => { //http://localhost:8000/messages/88ab2e
     }
 };
 
-const postNewMessage = (req, res) => { //http://localhost:8000/messages/
+const createNewMessage = (req, res) => { //http://localhost:8000/messages/
     const { text, user_name } = req.body;
 
     const newMessage = { text, id: uuidv4(), time: new Date().toLocaleString(), user_name };
@@ -37,32 +37,34 @@ const postNewMessage = (req, res) => { //http://localhost:8000/messages/
 const updateMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
     const { id } = req.params;
     const { text: newText } = req.body;
-    const index = messages.findIndex((message) => message.id === id);
+    const message = messages.find((message) => message.id === id);
 
-    if (index !== -1) {
+    if (message === undefined) {
+        return res.status(status.NOT_FOUND).json({ failure: "Message ID wasn't found. Updating was failed" });
+    } else {
+        const index = messages.findIndex((message) => message.id === id);
         messages[index].text = newText;
         messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
-    } else {
-        res.status(status.NOT_FOUND).json({ failure: "Message ID wasn't found. Updating was failed" });
     }
 };
 
 const deleteMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
     const { id } = req.params;
-    const index = messages.findIndex((message) => message.id === id);
+    const message = messages.find((message) => message.id === id);
 
-    if (index !== -1) {  // matan peter filter
-        messages.splice(index, 1); // removes 1 element at the given index
-        messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
+    if (message === undefined) {
+        return res.status(status.NOT_FOUND).json({ failure: "Message ID wasn't found. Deleting was failed" });
     } else {
-        res.status(status.NOT_FOUND).json({ failure: "Message ID wasn't found. Deleting was failed" });
+        const index = messages.findIndex((message) => message.id === id);
+        messages.splice(index, 1);
+        messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
     }
 };
 
 module.exports = {
     getAllMessages: getAllMessages,
     getSingelMessage: getSingelMessage,
-    postNewMessage: postNewMessage,
+    createNewMessage: createNewMessage,
     updateMessage: updateMessage,
     deleteMessage: deleteMessage
 }

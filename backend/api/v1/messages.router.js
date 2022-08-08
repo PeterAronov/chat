@@ -7,7 +7,7 @@ router.get("/", messagesController.getAllMessages);
 
 router.get("/:id", messagesController.getSingelMessage);
 
-router.post("/", messagesController.postNewMessage);
+router.post("/", messagesController.createNewMessage);
 
 router.put("/:id", messagesController.updateMessage);
 

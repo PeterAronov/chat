@@ -5,7 +5,7 @@ require('dotenv').config({ path: './config/test.env' }); // Default: path.resolv
 const supertest = require("supertest");
 const server = require("../app");
 const status = require('http-status');
-request = supertest(server);
+request = supertest(server); // supertest is a function that takes in a server and returns a supertest object. The IP and the Port are taken from 
 
 describe("Messages", () => {
     describe("GET /", () => {
@@ -97,6 +97,6 @@ describe("Messages", () => {
             const message = await request.get("/messages/" + lastMessageId).expect(status.OK);
             expect(message.body.message.text).toBe(textOld);
         });
-    });
+    })
 }
 );
