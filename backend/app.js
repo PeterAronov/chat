@@ -1,14 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-require('dotenv').config({ path: './config/test.env' }); // Default: path.resolve(process.cwd(), '.env')
+const path = require("path");
 
-const messagesRoute = require('./api/messages/messages'); // Access to to this file 
+const messagesRoute = require('./api/v1/messages.router'); // Access to to this file 
 
 const app = express();
+const forntedFolderPath = path.join(__dirname, '../fronted');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(express.static(forntedFolderPath))
 app.use("/messages", messagesRoute);// Every request for /messages rout will go to ./routes/messages-routes
 
 module.exports = app;

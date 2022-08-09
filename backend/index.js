@@ -1,5 +1,5 @@
-const app = require("./app");
 require('dotenv').config({ path: './config/index.env' }); // Default: path.resolve(process.cwd(), '.env')
+const app = require("./app");
 
 const port = process.env.PORT;
 const ip = process.env.IP;

@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    width: 100%;/* The width of the all body will be 100% of the screen */
+    font-family: 'Open Sans', sans-serif; /* The font of all the page will be Open Sans, if it doesn't work use sans-serif */
+    color: #333;
+    margin: 0px;/* The header won't have any margin */
+  }
+  
+  .leader-h {
+    width: 100%;/* Header width scales to fit all the screen */
+    background-color: #333;
+    color: #fafafa; 
+    padding: 50px 10%; /* top bottom - 50px if changes to 10px the header height will be more narrow. 10% for left right changed to 30% text will be more to the right because of the padding*/
+    margin: 0px; /* changed to 30px e.g the header will be shrunk from right left top bottom*/
+  }
+  
+  .message-container {
+    margin: 20px auto; /* Each twit will be top-bottom 20px from each other, auto - left-right centered to the middle of the screen */
+    width: 80%;/* 80% of the entire screen */
+    padding: 20px;/* padding of all the things which contained inside the message-container(even the message input change this to 50px you will see the text input padded more) */
+    border: 2px solid gray;
+    border-radius: 10px; /* border of the twit won't be square */
+    overflow: scroll; /* If changed to hidden than long texts won't be displayed */
+  }
+  
+  .new-message-input {
+    width: 100%; /* 100% of the parent container, but notice that the parent container(message-container) have padding of 20px */
+    height: 32px; /* Height of the input box*/
+    border: 2px solid lightgray; /* The border of the input box itself */
+    border-radius: 5px; /* border radius of the input text itself */
+    padding-left: 5px; /* padding of the inner text itself of the input box*/
+  }
+  
+  .new-message-input:focus {
+    border-color: #00cccc; /* When clicking the input box the color will change (This the meaning of focus) */
+    outline: none; /* changed to dashed the input box will be dashed when clicking the the input box (This is the meaning of focus) */
+  }
+  
+  .btn-message {
+    margin-top: 10px; /* the spread between the input text and the button */
+    background-color: #33cc00; /* color of the button itself */
+    color: #fafafa; /* color of the text inside the button */
+    font-size: 16px;
+    float: right; /* changed to left you will see the button on the left side */
+    border: none;
+    padding: 7px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-message:hover {
+    background-color: #4DE61A; /* when putting the mouse over the button the color will change */
+  }
+  
+  .btn-message:active {
+    background-color: #009900; /* when clicking the button the color will change */
+  }
+  
+  .message-time {
+    color: gray;
+    font-style: italic;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  
+  .message-body {
+    font-size: 20px;
+  }
+
+  .messages .message-container:hover{
+    background: rgb(213, 210, 210);
+}
+
+.deleteMessage{ 
+  position: relative;
+  float: right;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.deleteMessage:hover{
+  background-color: #f44336;
+  color: white;
+}
+
+#login-chat {
+  width: 250px; /* 45% of the entire body */
+  margin: 20px auto;
+  height: 40%; /* My addidtion - makes the same height and size dynamiclly  */
+  overflow: scroll;
+  
+  border: 1px solid black;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#user-name {
+  width: 70%;
+}

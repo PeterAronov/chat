@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Fronted</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> <!-- https://developers.google.com/fonts/docs/getting_started -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <h1 class="leader-h">Chat</h1>
+  <div id="login-chat"> 
+    <input id="user-name" type="text" placeholder="Username">
+    <button id="submit-btn" type="button" onclick="userLogin()">Submit</button>
+  </div>
+
+  <div class="message-container" style="display: none;">
+    <input type="text" class="new-message-input" id="new-message">
+    <button onclick="addNewMessage()" class="btn-message" id="message">Message</button>
+  </div>
+
+  <div class="messages" id="messages-target"> <!-- later to be filled from the server -->
+  </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./messages.js"></script><!-- the order is important because we're message.js is going to reference jquery -->
+</body>
+</html>
