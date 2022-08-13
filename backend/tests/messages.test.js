@@ -1,7 +1,9 @@
 // test() function isn't being loaded in with anything like a require.
 // jest provides the test() function as a global env
 
-require('dotenv').config({ path: './config/test.env' }); // Default: path.resolve(process.cwd(), '.env')
+require('dotenv').config({ path:__dirname + '/../config/test.env' }); // Default: path.resolve(process.cwd(), '.env')
+console.log(__dirname)
+console.log(process.cwd())
 const supertest = require("supertest");
 const server = require("../app");
 const status = require('http-status');
@@ -38,7 +40,7 @@ describe("Messages", () => {
                 .send({
                     user_name: "Tom",
                     text: "Hello World"
-                }).expect(status.OK);
+                }).expect(status.CREATED);
         });
 
         it("Should check if the last message is what we sent", async () => {

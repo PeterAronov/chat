@@ -31,7 +31,7 @@ const createNewMessage = (req, res) => { //http://localhost:8000/messages/
     const newMessage = { text, id: uuidv4(), time: new Date().toLocaleString(), user_name };
     messages.push(newMessage);
 
-    messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
+    messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath, status.CREATED);
 };
 
 const updateMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-1955-482e-9107-bf2ae8825baf
@@ -44,7 +44,7 @@ const updateMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-
     } else {
         const index = messages.findIndex((message) => message.id === id);
         messages[index].text = newText;
-        messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
+        messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath, status.OK);
     }
 };
 
@@ -57,7 +57,7 @@ const deleteMessage = (req, res) => { //http://localhost:8000/messages/88ab2e95-
     } else {
         const index = messages.findIndex((message) => message.id === id);
         messages.splice(index, 1);
-        messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath);
+        messagesFileService.writeMessagesToJsonFile(res, messages, messagesJsonPath, status.OK);
     }
 };
 
