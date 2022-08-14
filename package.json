@@ -1,4 +1,9 @@
 {
+    
+    "name": "chat",
+    "version": "1.0.0",
+    "description": "Chat App",
+    "main": "backend/index.js",
     "scripts": {
         "start": "node backend/index.js"
     },
