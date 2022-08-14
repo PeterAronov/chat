@@ -1,5 +1,5 @@
 {
-    
+    "comment": "git push heroku HEAD:master",
     "name": "chat",
     "version": "1.0.0",
     "description": "Chat App",
