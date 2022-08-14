@@ -1,1 +1,1 @@
-web: node backend/index.js  // git push heroku HEAD:master   
+web: node backend/index.js
