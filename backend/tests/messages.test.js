@@ -2,8 +2,6 @@
 // jest provides the test() function as a global env
 
 require('dotenv').config({ path:__dirname + '/../config/test.env' }); // Default: path.resolve(process.cwd(), '.env')
-console.log(__dirname)
-console.log(process.cwd())
 const supertest = require("supertest");
 const server = require("../app");
 const status = require('http-status');
