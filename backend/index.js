@@ -1,4 +1,4 @@
-require('dotenv').config({ path:__dirname + '/config/index.env' }); // Default: path.resolve(process.cwd(), '.env')
+//require('dotenv').config({ path:__dirname + '/config/index.env' }); // Default: path.resolve(process.cwd(), '.env')
 const app = require("./app");
 
 const port = process.env.PORT;
