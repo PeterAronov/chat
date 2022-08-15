@@ -11,7 +11,7 @@ const getAllMessages = async () => {
 
 const postMessage = async (userName, messageText) => {
     const newMessage = {
-        user_name: userName,
+        name: userName,
         text: messageText
     };
 
@@ -47,7 +47,7 @@ const displayAllMessages = (messages) => {
         divMessageTime.className = 'message-time';
         divMessageBody.className = 'message-body';
         const dateText = document.createTextNode(new Date(message.time).toLocaleString());
-        const bodyText = document.createTextNode(message.user_name + ': ' + message.text);
+        const bodyText = document.createTextNode(message.name + ': ' + message.text);
         const IdText = document.createTextNode(message.id);
         divMessageTime.appendChild(dateText);
         divMessageBody.appendChild(bodyText);
