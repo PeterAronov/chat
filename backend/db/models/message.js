@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator')
+const { Schema } = mongoose
 
-const Message = mongoose.model('Message', { // In the MongoDB under the database task-manager-api mongoose will create a collection called users(User inserted)
+const messageSchema = new Schema({ 
     name: {
         type: String, // The type of the field is a string. Other types are: number, boolean, date, buffer, objectid, array and they will be rejected by the server.
         required: true,
@@ -18,5 +19,8 @@ const Message = mongoose.model('Message', { // In the MongoDB under the database
         trim: true
     }
 })
+
+const Message = mongoose.model('Message', messageSchema) // In the MongoDB under the database task-manager-api mongoose will create a collection called users(User inserted)
+
 
 module.exports = Message

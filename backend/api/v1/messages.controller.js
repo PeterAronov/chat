@@ -20,11 +20,11 @@ const getSingelMessage = async (req, res) => { //http://localhost:8000/messages/
     try {
         const message = await Message.findById(_id);
 
-        if (!user) {
+        if (!message) {
             return res.status(status.NOT_FOUND).send()
         }
 
-        res.status(status.OK).send(user)
+        res.status(status.OK).send(message)
     } catch (error) {
         res.status(status.INTERNAL_SERVER_ERROR).send(error)
     }
