@@ -44,7 +44,7 @@ const displayAllMessages = (messagesObjectArray) => {
         divMessageContainer.className = 'message-container';
         divMessageTime.className = 'message-time';
         divMessageBody.className = 'message-body';
-        const dateText = document.createTextNode(new Date(message.time).toLocaleString());
+        const dateText = document.createTextNode(new Date(message.createdAt).toLocaleString());
         const bodyText = document.createTextNode(message.name + ': ' + message.text);
         const IdText = document.createTextNode(message._id);
         divMessageTime.appendChild(dateText);

@@ -2,9 +2,6 @@ const status = require('http-status');
 const messagesJson = require("../../messages.json");
 const Message = require('../../db/models/message');
 
-let messages = messagesJson.messages;
-const messagesJsonPath = process.env.MESSAGES_JSON_PATH;
-
 const getAllMessages = async (req, res) => { //http://localhost:8000/messages/
     try {
         const messages = await Message.find();
@@ -32,7 +29,7 @@ const getSingelMessage = async (req, res) => { //http://localhost:8000/messages/
 
 const createNewMessage = async (req, res) => { //http://localhost:8000/messages/
     const { text, name } = req.body;
-    const newMessage = new Message({ text: text, time: new Date().toLocaleString(), name: name })
+    const newMessage = new Message({ text: text, name: name })
 
     try {
         const message = await newMessage.save();
