@@ -3,7 +3,6 @@ testAPI = () => {                      // Testing Graph API after login.  See st
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
       localStorage.setItem("myUserName", response.name);
-      document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!'
     })
 }
 
