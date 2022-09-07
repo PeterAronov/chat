@@ -9,10 +9,10 @@
 </head>
 <body>
   <h1 class="leader-h">Chat</h1>
-  <div id="login-chat"> 
+  <!-- <div id="login-chat"> 
     <input id="user-name" type="text" placeholder="Username">
     <button id="submit-btn" type="button" onclick="userLogin()">Submit</button>
-  </div>
+  </div> -->
 
   <!-- https://developers.facebook.com/docs/facebook-login/web/login-button/ 
        data-witdh , data-size are data attributes which effect the login button
@@ -20,7 +20,7 @@
 
   <div id="login-chat2">
     <!-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
-    <fb:login-button class="fb-login-button" size="xlarge" scope="public_profile,email" onlogin="checkLoginState()"></fb:login-button>
+    <fb:login-button class="fb-login-button" size="xlarge" scope="public_profile,email" onlogin="checkLoginState()" ></fb:login-button>
   </div>
 
   <div class="message-container" style="display: none;">
