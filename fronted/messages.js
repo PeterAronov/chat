@@ -75,7 +75,7 @@ const userLogin = () => {
     userName = user;
     const loginDiv = document.getElementById("login-chat");
     loginDiv.style.display = "none";
-    document.getElementsByClassName('message-container')[0].style.display = "block";
+    document.getElementsByClassName('message-container')[0].style.display = "block"; // getElementsByClassName returns an array of elements with the same class name
 
     const messageTextDiv = document.getElementById("new-message");
     messageTextDiv.placeholder = userName + " Say something . . ."

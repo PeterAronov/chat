@@ -5,12 +5,22 @@
   <title>Chat Fronted</title>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> <!-- https://developers.google.com/fonts/docs/getting_started -->
   <link rel="stylesheet" href="./style.css">
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0&appId=1024380391565477&autoLogAppEvents=1" nonce="4IKIqiML"></script>
 </head>
 <body>
   <h1 class="leader-h">Chat</h1>
   <div id="login-chat"> 
     <input id="user-name" type="text" placeholder="Username">
     <button id="submit-btn" type="button" onclick="userLogin()">Submit</button>
+  </div>
+
+  <!-- https://developers.facebook.com/docs/facebook-login/web/login-button/ 
+       data-witdh , data-size are data attributes which effect the login button
+       enter the url above and you can change this attributes and see how they effect the login button    -->
+
+  <div id="login-chat2">
+    <!-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+    <fb:login-button class="fb-login-button" size="xlarge" scope="public_profile,email" onlogin="checkLoginState()"></fb:login-button>
   </div>
 
   <div class="message-container" style="display: none;">
@@ -23,5 +33,6 @@
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="./messages.js"></script><!-- the order is important because we're message.js is going to reference jquery -->
+  <script src="./facebook.login.js"></script>
 </body>
 </html>
