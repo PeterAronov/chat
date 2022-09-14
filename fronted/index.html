@@ -8,8 +8,9 @@
   <script defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0&appId=1024380391565477&autoLogAppEvents=1" nonce="4IKIqiML"></script>
   <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script defer src="./services/localStorage.service.js"></script>
-  <script defer src="./services/facebook.service.js"></script>
   <script defer src="./services/messages.controller.js"></script>
+  <script defer src="./services/dom.service.js"></script>
+  <script defer src="./services/facebook.service.js"></script>
   <script defer src="./index.js"></script>
 </head>
 <body>
@@ -25,7 +26,12 @@
 
   <div id="login-chat2">
     <!-- <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
-    <fb:login-button class="fb-login-button" size="xlarge" scope="public_profile,email" onlogin="FacebookLogin.checkLoginState()" auto-logout-link="true"></fb:login-button>
+    <fb:login-button class="fb-login-button" 
+                     size="xlarge" 
+                     scope="public_profile,email" 
+                     onlogin="FacebookLogin.checkLoginState()" 
+                     auto-logout-link="true">
+    </fb:login-button>
   </div>
 
   <div class="message-container" style="display: none;">
