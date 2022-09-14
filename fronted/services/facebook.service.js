@@ -8,7 +8,6 @@ class FacebookLogin {
         console.log('Welcome!  Fetching your information.... ')
         FB.api('/me', function (response) {
             console.log('Successful login for: ' + response.name)
-            setLocalStorageUserName(response.name)
         })
     }
 
@@ -22,6 +21,7 @@ class FacebookLogin {
 
     static checkLoginState() {             // Called when a person is finished with the Login Button. See the onlogin handler
         FB.getLoginStatus((response) => FacebookLogin.statusChangeCallback(response))
+        setLocalStorageUserName(response.name)
         initChatMessagesAfterLogin()
     }
 
