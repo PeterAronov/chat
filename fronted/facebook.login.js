@@ -1,8 +1,9 @@
-testAPI = () => {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+
+testAPI = (storage) => {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      localStorage.setItem("myUserName", response.name);
+      storage.setItem("myUserName", response.name);
     })
 }
 
@@ -19,6 +20,10 @@ checkLoginState = () => {               // Called when a person is finished with
     FB.getLoginStatus((response) =>{   // See the onlogin handler
         statusChangeCallback(response);
     });
+}
+
+class FacebookLogin{
+    init()
 }
 
 window.fbAsyncInit = function () {

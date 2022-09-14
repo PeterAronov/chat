@@ -20,15 +20,15 @@ describe("Messages", () => {
         });
 
         it("Should return 200 OK for a specific id", async () => {
-            const message = await request.get("/messages/88ab2e95-1955-482e-9107-bf2ae8825baf").expect(status.OK);
-            expect(message.body.message.name).toBe("Tom");
+            const message = await request.get("/messages/630d4cc2d9d042f6007a9a0b").expect(status.OK);
+            expect(message.body.name).toBe("Tom");
         });
 
         it("Should return 404 not found for a specific id", async () => {
-            const message = await request.get("/messages/xyz").expect(status.NOT_FOUND);
+            const message = await request.get("/messages/630d4cc2d9d042f6007a9a02").expect(status.NOT_FOUND);
         });
     });
-
+    
     describe("POST /", () => {
         let messageId = "";
 
@@ -43,19 +43,19 @@ describe("Messages", () => {
 
         it("Should check if the last message is what we sent", async () => {
             const messages = await request.get("/messages").expect(status.OK);
-            const messagesLength = messages.body.messages.length - 1;
-            messageId = messages.body.messages[messagesLength].id;
-            expect(messages.body.messages[messagesLength].text).toBe("Hello World");
+            const messagesLength = messages.body.length - 1;
+            messageId = messages.body[messagesLength]._id;
+            expect(messages.body[messagesLength].text).toBe("Hello World");
         })
 
         it("Should delete the last message sent", async () => {
+            console.log(messageId)
             const messages = await request.delete("/messages/" + messageId).expect(status.OK);
         })
     }
     );
-
-
-    describe("PUT /", () => {
+    
+    describe("PATCH /", () => {
         let messagesArray = [];
         let textOld = "";
         let messagesLength = 0;
@@ -64,15 +64,15 @@ describe("Messages", () => {
 
         it("Should receive all the messages", async () => {
             const messages = await request.get("/messages").expect(status.OK);
-            messagesArray = messages.body.messages;
+            messagesArray = messages.body;
             messagesLength = messagesArray.length - 1;
             textOld = messagesArray[messagesLength].text;
-            lastMessageId = messagesArray[messagesLength].id;
+            lastMessageId = messagesArray[messagesLength]._id;
         })
 
         it("Should change the text of the last message", async () => {
             const message = await request
-                .put("/messages/" + lastMessageId)
+                .patch("/messages/" + lastMessageId)
                 .send({
                     text: textNew
                 })
@@ -81,12 +81,12 @@ describe("Messages", () => {
 
         it("Should check if the text did changed", async () => {
             const message = await request.get("/messages/" + lastMessageId).expect(status.OK);
-            expect(message.body.message.text).toBe(textNew);
+            expect(message.body.text).toBe(textNew);
         });
 
         it("Should change the text of the last message back", async () => {
             const message = await request
-                .put("/messages/" + lastMessageId)
+                .patch("/messages/" + lastMessageId)
                 .send({
                     text: textOld
                 })
@@ -95,7 +95,7 @@ describe("Messages", () => {
 
         it("Should check if the text did changed back", async () => {
             const message = await request.get("/messages/" + lastMessageId).expect(status.OK);
-            expect(message.body.message.text).toBe(textOld);
+            expect(message.body.text).toBe(textOld);
         });
     })
 }

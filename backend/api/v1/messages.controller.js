@@ -1,6 +1,5 @@
 const status = require('http-status');
-const messagesJson = require("../../messages.json");
-const Message = require('../../db/models/message');
+const Message = require('./message.model');
 
 const getAllMessages = async (req, res) => { //http://localhost:8000/messages/
     try {
@@ -16,7 +15,6 @@ const getSingelMessage = async (req, res) => { //http://localhost:8000/messages/
 
     try {
         const message = await Message.findById(_id);
-
         if (!message) {
             return res.status(status.NOT_FOUND).send()
         }
