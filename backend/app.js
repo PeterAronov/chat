@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require('helmet');
 const bodyParser = require("body-parser");
 const path = require("path");
 require('./db/mongoose');
@@ -10,6 +11,7 @@ const forntedFolderPath = path.join(__dirname, '../fronted');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
 
 app.use(express.static(forntedFolderPath))
 app.use("/messages", messagesRoute);// Every request for /messages rout will go to ./routes/messages-routes
