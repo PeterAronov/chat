@@ -9,6 +9,7 @@ class FacebookLogin {
         FB.api('/me', function (response) {
             console.log('Successful login for: ' + response.name)
             setLocalStorageUserName(response.name)
+            initChatMessagesAfterLogin()
         })
     }
 
@@ -17,7 +18,6 @@ class FacebookLogin {
         console.log(response);                   // The current login status of the person.
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
             FacebookLogin.getUserName()
-            initChatMessagesAfterLogin()
         }
     }
 
@@ -34,6 +34,6 @@ class FacebookLogin {
         });
 
         console.log("facebook init (Peter Reomove this line)")
-        //FB.getLoginStatus((response) => FacebookLogin.statusChangeCallback(response))   // Called after the JS SDK has been initialized. Returns the login status.
+        FB.getLoginStatus((response) => FacebookLogin.statusChangeCallback(response))   // Called after the JS SDK has been initialized. Returns the login status.
     }
 }
