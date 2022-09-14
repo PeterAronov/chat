@@ -1,6 +1,7 @@
 let userName = "";
 
 const facebookLogin = new FacebookLogin('1024380391565477', 'v14.0')
+facebookLogin.init()
 
 const getAllMessages = async () => {
     try {
