@@ -1,7 +1,3 @@
-setLocalStorageUserName = (userName) => {
-    localStorage.setItem("userName", userName);
-}
+setLocalStorageUserName = (userName) => localStorage.setItem("userName", userName)
 
-getLocalStorageUserName = () => {
-    return localStorage.getItem("userName");
-}
+getLocalStorageUserName = () => localStorage.getItem("userName")
