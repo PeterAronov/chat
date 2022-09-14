@@ -16,13 +16,13 @@ class FacebookLogin {
         console.log('statusChangeCallback');
         console.log(response);                   // The current login status of the person.
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-            FacebookLogin.getUserName();
+            FacebookLogin.getUserName()
+            initChatMessagesAfterLogin()
         }
     }
 
     static checkLoginState() {             // Called when a person is finished with the Login Button. See the onlogin handler
         FB.getLoginStatus((response) => FacebookLogin.statusChangeCallback(response))
-        initChatMessagesAfterLogin()
     }
 
     init() {
