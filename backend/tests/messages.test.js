@@ -1,7 +1,7 @@
 // test() function isn't being loaded in with anything like a require.
 // jest provides the test() function as a global env
 
-require('dotenv').config({ path: './config/test.env' }); // Default: path.resolve(process.cwd(), '.env')
+require('dotenv').config({ path:__dirname + '/../config/test.env' }); // Default: path.resolve(process.cwd(), '.env')
 const supertest = require("supertest");
 const server = require("../app");
 const status = require('http-status');
@@ -21,7 +21,7 @@ describe("Messages", () => {
 
         it("Should return 200 OK for a specific id", async () => {
             const message = await request.get("/messages/88ab2e95-1955-482e-9107-bf2ae8825baf").expect(status.OK);
-            expect(message.body.message.user_name).toBe("Tom");
+            expect(message.body.message.name).toBe("Tom");
         });
 
         it("Should return 404 not found for a specific id", async () => {
@@ -36,9 +36,9 @@ describe("Messages", () => {
             const message = await request
                 .post("/messages")
                 .send({
-                    user_name: "Tom",
+                    name: "Tom",
                     text: "Hello World"
-                }).expect(status.OK);
+                }).expect(status.CREATED);
         });
 
         it("Should check if the last message is what we sent", async () => {

@@ -9,7 +9,7 @@ router.get("/:id", messagesController.getSingelMessage);
 
 router.post("/", messagesController.createNewMessage);
 
-router.put("/:id", messagesController.updateMessage);
+router.patch("/:id", messagesController.updateMessage);
 
 router.delete("/:id", messagesController.deleteMessage);
 

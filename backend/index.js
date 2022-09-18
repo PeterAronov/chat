@@ -1,5 +1,10 @@
-require('dotenv').config({ path: './config/index.env' }); // Default: path.resolve(process.cwd(), '.env')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({ path: __dirname + '/config/dev.env' }) // Default: path.resolve(process.cwd(), '.env')
+} else {
+  require('dotenv').config({ path: __dirname + '/config/prod.env' })
+}
 const app = require("./app");
+require('./db/mongoose');
 
 const port = process.env.PORT;
 const ip = process.env.IP;

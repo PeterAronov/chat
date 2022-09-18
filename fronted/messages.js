@@ -3,7 +3,7 @@ let userName = "";
 const getAllMessages = async () => {
     try {
         const response = await axios.get('/messages');
-        displayAllMessages(response.data.messages);
+        displayAllMessages(response.data); // response.data is an array of object messages
     } catch (error) {
         console.error(error);
     }
@@ -11,13 +11,12 @@ const getAllMessages = async () => {
 
 const postMessage = async (userName, messageText) => {
     const newMessage = {
-        user_name: userName,
+        name: userName,
         text: messageText
     };
 
     try {
-        const response = await axios.post('/messages/', newMessage);
-        console.log(response.data);
+        await axios.post('/messages/', newMessage);
     } catch (error) {
         console.log(error);
     }
@@ -25,34 +24,33 @@ const postMessage = async (userName, messageText) => {
 
 const deleteMessage = async (messageId) => {
     try {
-        const response = await axios.delete('/messages/' + messageId);
-        console.log(response.data);
+        await axios.delete('/messages/' + messageId);
     } catch (error) {
         console.log(error);
     }
 }
 
-const displayAllMessages = (messages) => {
+const displayAllMessages = (messagesObjectArray) => {
     const messagesNode = document.getElementById("messages-target");
 
     while (messagesNode.hasChildNodes()) {
         messagesNode.removeChild(messagesNode.lastChild);
     }
 
-    messages.forEach((message) => {
+    messagesObjectArray.forEach((message) => {
         let divMessageContainer = document.createElement("div");
         let divMessageTime = document.createElement("div");
         let divMessageBody = document.createElement("div");
         divMessageContainer.className = 'message-container';
         divMessageTime.className = 'message-time';
         divMessageBody.className = 'message-body';
-        const dateText = document.createTextNode(new Date(message.time).toLocaleString());
-        const bodyText = document.createTextNode(message.user_name + ': ' + message.text);
-        const IdText = document.createTextNode(message.id);
+        const dateText = document.createTextNode(new Date(message.createdAt).toLocaleString());
+        const bodyText = document.createTextNode(message.name + ': ' + message.text);
+        const IdText = document.createTextNode(message._id);
         divMessageTime.appendChild(dateText);
         divMessageBody.appendChild(bodyText);
+        addDeleteButton(divMessageBody, message._id);
         divMessageContainer.appendChild(divMessageTime);
-        addDeleteButton(divMessageBody, message.id);
         divMessageContainer.appendChild(divMessageBody);
         messagesNode.append(divMessageContainer);
     });
@@ -80,19 +78,19 @@ const userLogin = () => {
     document.getElementsByClassName('message-container')[0].style.display = "block";
 
     const messageTextDiv = document.getElementById("new-message");
-    messageTextDiv.placeholder = userName+ " Say something . . ."
+    messageTextDiv.placeholder = userName + " Say something . . ."
 
     setInterval(getAllMessages, 500);
 }
 
-const addNewMessage = () => { 
+const addNewMessage = () => {
     const messageText = document.getElementById("new-message").value;
 
     if (messageText === "") {
         alert("Please enter a message");
         return;
     }
-    
+
     postMessage(userName, messageText);
     document.getElementById("new-message").value = "";
 }
