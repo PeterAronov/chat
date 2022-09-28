@@ -9,7 +9,7 @@ class FacebookLogin {
         FB.api('/me', function (response) {
             console.log('Successful login for: ' + response.name)
             setLocalStorageUserName(response.name)
-            initChatMessagesAfterLogin()
+            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
         })
     }
 

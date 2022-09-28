@@ -1,3 +1,6 @@
+// message service
+// message component
+
 const getAllMessages = async () => {
     try {
         const response = await axios.get('/messages');

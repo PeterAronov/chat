@@ -2,9 +2,9 @@ const express = require("express");
 const helmet = require('helmet');
 const bodyParser = require("body-parser");
 const path = require("path");
-require('./db/mongoose');
-
-const messagesRoute = require('./api/v1/messages.router'); // Access to to this file 
+require('./api/v1/db/mongoose');
+const errorHandler = require('./api/v1/middelwares/error.handler')
+const messagesRoute = require('./api/v1/routes/message');
 
 const app = express();
 const forntedFolderPath = path.join(__dirname, '../fronted');
@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
 
 app.use(express.static(forntedFolderPath))
-app.use("/messages", messagesRoute);// Every request for /messages rout will go to ./routes/messages-routes
+app.use(messagesRoute)// Every request for /messages rout will go to ./routes/messages-routes
+app.use(errorHandler)
 
 module.exports = app;
