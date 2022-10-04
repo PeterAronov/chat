@@ -1,6 +1,6 @@
 const Message = require('../models/message');
 
-class messageService {
+class MessageService {
 
     async getAllMessages() {
         try {
@@ -90,4 +90,4 @@ class messageService {
     }
 }
 
-module.exports = new messageService();
+module.exports = new MessageService();

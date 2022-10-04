@@ -1,5 +1,6 @@
-// message service
+// message service used to use API calls and talk to the server
 // message component
+// the problem here is that the code combines logic code with UI code
 
 const getAllMessages = async () => {
     try {
