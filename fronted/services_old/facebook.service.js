@@ -12,11 +12,11 @@ class FacebookLogin {
         initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
     }
 
-    static statusChangeCallback = (response) => {
+    static statusChangeCallback = async (response) => {
         console.log('statusChangeCallback');
 
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
-            FacebookLogin.getUserName()
+            await FacebookLogin.getUserName()
         }
     }
 
