@@ -6,10 +6,14 @@ class FacebookLogin {
 
     static async getUserName() {
         console.log('Welcome!  Fetching your information.... ')
+        try{
         const response = await FB.api('/me')
         console.log('Successful new login for: ' + response.name)
         setLocalStorageUserName(response.name)
         initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     static statusChangeCallback = async (response) => {
