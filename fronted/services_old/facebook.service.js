@@ -4,7 +4,7 @@ class FacebookLogin {
         this.version = version;
     }
 
-    async getUserName() {
+    static getUserName() {
         console.log('Welcome!  Fetching your information.... ')
         FB.api('/me', function (response) {
             console.log('Successful login for: ' + response.name)
