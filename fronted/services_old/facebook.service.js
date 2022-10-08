@@ -4,18 +4,34 @@ class FacebookLogin {
         this.version = version;
     }
 
+    static getUserNamePromiseWrapper() {    // we used this wrapper because FB.api is an async function. 
+        return new Promise((resolve, reject) => { // https://stackoverflow.com/questions/37104199/how-to-await-for-a-callback-to-return
+            FB.api('/me', (response) => {
+                if (response && !response.error) {
+                    resolve(response.name)
+                } else {
+                    reject(response.error)
+                }
+            })
+        })
+    }
+
     static getUserName() {
         console.log('Welcome!  Fetching your information.... ')
-        FB.api('/me', function (response) {
+
+        try {
+            const userName = await FacebookLogin.getUserNamePromiseWrapper()
             console.log('Successful login for: ' + response.name)
-            setLocalStorageUserName(response.name)
+            setLocalStorageUserName(userName)
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
-        })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     static statusChangeCallback = (response) => {
         console.log('statusChangeCallback');
-
+        console.log()
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
             FacebookLogin.getUserName()
         }
@@ -35,14 +51,3 @@ class FacebookLogin {
     }
 }
 
-// static async getUserName() {
-//     console.log('Welcome!  Fetching your information.... ')
-//     try {
-//         const response = await FB.api('/me')
-//         console.log('Successful new login for: ' + response.name)
-//         setLocalStorageUserName(response.name)
-//         initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
