@@ -22,7 +22,7 @@ class FacebookLogin {
     }
 
     static checkLoginState() {             // Called when a person is finished with the Login Button. See the onlogin handler
-        FB.getLoginStatus(FacebookLogin.getLoginStatusCallback) // getLoginStatus() is called with the callback function 
+        FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
     }
 
     init() {
@@ -34,7 +34,7 @@ class FacebookLogin {
         });
 
         console.log("facebook init (Peter Reomove this line)")
-        FB.getLoginStatus(FacebookLogin.getLoginStatusCallback)   // Called after the JS SDK has been initialized. Returns the login status.
+        FB.getLoginStatus(FacebookLogin.statusChangeCallback)   // Called after the JS SDK has been initialized. Returns the login status.
     }
 }
 

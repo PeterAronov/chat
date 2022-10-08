@@ -1,10 +1,1 @@
-class Login {
-    constructor() {
-        this.login = document.getElementById('login')
-        this.login.addEventListener('click', () => this.login())
-    }
-
-    login() {
-        console.log('login')
-    }
-}
+// here will be a function is authinticated, here will be called facebook service, index 

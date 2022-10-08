@@ -1,13 +1,18 @@
 class LocalStorageService {
-    
-    setUserName(name) {
-        localStorage.setItem('userName', name)
+    constructor(userName) {
+        this.userName = userName;
+    }
+
+    setUserName(userName) {
+        //localStorage.setItem('userName', userName)
+        this.userName = userName;
     }
 
     getUserName() {
-        return localStorage.getItem('userName')
+        //return localStorage.getItem('userName')
+        return this.userName
     }
 }
 
-module.exports = new LocalStorageService()
+module.exports = LocalStorageService
 

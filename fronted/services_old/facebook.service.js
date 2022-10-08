@@ -4,19 +4,18 @@ class FacebookLogin {
         this.version = version;
     }
 
-    static getUserName() {
+    async getUserName() {
         console.log('Welcome!  Fetching your information.... ')
-        FB.api('/me', function (response) {
-            console.log('Successful login for: ' + response.name)
-            setLocalStorageUserName(response.name)
-            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
-        })
+        const response = FB.api('/me')
+        console.log('Successful new login for: ' + response.name)
+        setLocalStorageUserName(response.name)
+        initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
     }
 
     static statusChangeCallback = (response) => {
         console.log('statusChangeCallback');
-        console.log(response);                   // The current login status of the person.
-        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
             FacebookLogin.getUserName()
         }
     }
@@ -32,8 +31,5 @@ class FacebookLogin {
             xfbml: true,                     // Parse social plugins on this webpage.
             version: this.version           // Use this Graph API version for this call.
         });
-
-        console.log("facebook init (Peter Reomove this line)")
-        FB.getLoginStatus(FacebookLogin.statusChangeCallback)   // Called after the JS SDK has been initialized. Returns the login status.
     }
 }
