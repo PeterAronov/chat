@@ -4,23 +4,20 @@ class FacebookLogin {
         this.version = version;
     }
 
-    static async getUserName() {
+    async getUserName() {
         console.log('Welcome!  Fetching your information.... ')
-        try{
-        const response = await FB.api('/me')
-        console.log('Successful new login for: ' + response.name)
-        setLocalStorageUserName(response.name)
-        initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
-        } catch (error) {
-            console.log(error)
-        }
+        FB.api('/me', function (response) {
+            console.log('Successful login for: ' + response.name)
+            setLocalStorageUserName(response.name)
+            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+        })
     }
 
-    static statusChangeCallback = async (response) => {
+    static statusChangeCallback = (response) => {
         console.log('statusChangeCallback');
 
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
-            await FacebookLogin.getUserName()
+            FacebookLogin.getUserName()
         }
     }
 
@@ -37,3 +34,15 @@ class FacebookLogin {
         });
     }
 }
+
+// static async getUserName() {
+//     console.log('Welcome!  Fetching your information.... ')
+//     try {
+//         const response = await FB.api('/me')
+//         console.log('Successful new login for: ' + response.name)
+//         setLocalStorageUserName(response.name)
+//         initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
