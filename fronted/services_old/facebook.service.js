@@ -49,7 +49,7 @@ class FacebookLogin {
             version: this.version           // Use this Graph API version for this call.
         });
 
-        FacebookLogin.getUserName();
+        await FacebookLogin.getUserName();
     }
 }
 
