@@ -4,7 +4,7 @@ class FacebookLogin {
         this.version = version;
     }
 
-    static getUserNamePromiseWrapper() {    // we used this wrapper because FB.api is an async function. 
+    static getUserNamePromiseWrapper() {    // we used this wrapper because FB.api does not support promises
         return new Promise((resolve, reject) => { // https://stackoverflow.com/questions/37104199/how-to-await-for-a-callback-to-return
             FB.api('/me', (response) => {
                 if (response && !response.error) {
@@ -16,7 +16,7 @@ class FacebookLogin {
         })
     }
 
-    static getUserName() {
+    static getUserName = async () => {
         console.log('Welcome!  Fetching your information.... ')
 
         try {
@@ -29,11 +29,11 @@ class FacebookLogin {
         }
     }
 
-    static statusChangeCallback = (response) => {
+    static statusChangeCallback = async(response) => {
         console.log('statusChangeCallback');
         console.log()
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
-            FacebookLogin.getUserName()
+            await FacebookLogin.getUserName()
         }
     }
 
