@@ -29,7 +29,7 @@ class FacebookLogin {
         }
     }
 
-    static statusChangeCallback = async(response) => {
+    static statusChangeCallback = async (response) => {
         console.log('statusChangeCallback');
         console.log()
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
@@ -48,6 +48,8 @@ class FacebookLogin {
             xfbml: true,                     // Parse social plugins on this webpage.
             version: this.version           // Use this Graph API version for this call.
         });
+
+        FacebookLogin.statusChangeCallback();
     }
 }
 
