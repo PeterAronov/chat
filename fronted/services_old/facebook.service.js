@@ -21,7 +21,7 @@ class FacebookLogin {
 
         try {
             const userName = await FacebookLogin.getUserNamePromiseWrapper()
-            console.log('Successful login for: ' + response.name)
+            console.log('Successful login for: ' + userName)
             setLocalStorageUserName(userName)
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
         } catch (error) {
