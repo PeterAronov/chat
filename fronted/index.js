@@ -5,5 +5,5 @@
 
 
 const facebookLogin = new FacebookLogin('614397593554229', 'v14.0')
-await facebookLogin.init()
+facebookLogin.init()
  

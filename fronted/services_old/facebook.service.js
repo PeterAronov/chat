@@ -41,7 +41,7 @@ class FacebookLogin {
         FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
     }
 
-    async init() {
+    init = () => {
         FB.init({
             appId: this.appId,
             cookie: true,                     // Enable cookies to allow the server to access the session.
@@ -49,7 +49,11 @@ class FacebookLogin {
             version: this.version           // Use this Graph API version for this call.
         });
 
-        await FacebookLogin.getUserName();
+        const userName = getLocalStorageUserName()
+        
+        if (userName !== 'undefined') {
+            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+        }
     }
 }
 
