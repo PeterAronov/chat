@@ -41,7 +41,7 @@ class FacebookLogin {
         FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
     }
 
-    init() {
+    async init() {
         FB.init({
             appId: this.appId,
             cookie: true,                     // Enable cookies to allow the server to access the session.
