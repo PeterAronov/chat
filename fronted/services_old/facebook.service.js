@@ -35,6 +35,10 @@ class FacebookLogin {
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
             await FacebookLogin.getUserName()
         }
+        else if (response.status === 'not_authorized') {
+            console.log('Please log into this app.')
+            FB.logout((response) => document.location.reload() )
+        }
     }
 
     static checkLoginState() {             // Called when a person is finished with the Login Button. See the onlogin handler
@@ -57,3 +61,5 @@ class FacebookLogin {
     }
 }
 
+
+// https://chrome.google.com/webstore/detail/ignore-x-frame-headers/gleekbfjekiniecknbkamfmkohkpodhe

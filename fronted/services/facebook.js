@@ -4,20 +4,40 @@ class FacebookLogin {
         this.version = version;
     }
 
-    static getUserName() {
-        console.log('Welcome!  Fetching your information.... ')
-        FB.api('/me', function (response) {
-            console.log('Successful login for: ' + response.name)
-            setLocalStorageUserName(response.name)
-            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+    static getUserNamePromiseWrapper() {    // we used this wrapper because FB.api does not support promises
+        return new Promise((resolve, reject) => { // https://stackoverflow.com/questions/37104199/how-to-await-for-a-callback-to-return
+            FB.api('/me', (response) => {
+                if (response && !response.error) {
+                    resolve(response.name)
+                } else {
+                    reject(response.error)
+                }
+            })
         })
     }
 
-    static statusChangeCallback = (response) => {
+    static getUserName = async () => {
+        console.log('Welcome!  Fetching your information.... ')
+
+        try {
+            const userName = await FacebookLogin.getUserNamePromiseWrapper()
+            console.log('Successful login for: ' + userName)
+            setLocalStorageUserName(userName)
+            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static statusChangeCallback = async (response) => {
         console.log('statusChangeCallback');
-        console.log(response);                   // The current login status of the person.
-        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-            FacebookLogin.getUserName()
+        console.log()
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
+            await FacebookLogin.getUserName()
+        }
+        else if (response.status === 'not_authorized') {
+            console.log('Please log into this app.')
+            FB.logout((response) => document.location.reload() )
         }
     }
 
@@ -25,16 +45,19 @@ class FacebookLogin {
         FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
     }
 
-    init() {
+    init = () => {
         FB.init({
             appId: this.appId,
             cookie: true,                     // Enable cookies to allow the server to access the session.
-            xfbml: true,                     // Parse social plugins on this webpage.
+            xfbml: false,                     // Parse social plugins on this webpage.
             version: this.version           // Use this Graph API version for this call.
         });
 
-        console.log("facebook init (Peter Reomove this line)")
-        FB.getLoginStatus(FacebookLogin.statusChangeCallback)   // Called after the JS SDK has been initialized. Returns the login status.
+        const userName = getLocalStorageUserName()
+        
+        if (userName !== 'undefined') {
+            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+        }
     }
 }
 
