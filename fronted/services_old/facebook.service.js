@@ -2,6 +2,7 @@ class FacebookLogin {
     constructor(appId, version) {
         this.appId = appId;
         this.version = version;
+        this.accessToken = null;
     }
 
     static getUserNamePromiseWrapper() {    // we used this wrapper because FB.api does not support promises
@@ -33,7 +34,10 @@ class FacebookLogin {
         console.log('statusChangeCallback');
         console.log()
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
+            console.log(response)
             await FacebookLogin.getUserName()
+            this.accessToken = response.authResponse.accessToken;
+            console.log(this.accessToken);
         }
         else if (response.status === 'not_authorized') {
             console.log('Please log into this app.')
@@ -61,5 +65,5 @@ class FacebookLogin {
     }
 }
 
-
+module.exports = FacebookLogin
 // https://chrome.google.com/webstore/detail/ignore-x-frame-headers/gleekbfjekiniecknbkamfmkohkpodhe
