@@ -34,6 +34,7 @@ class FacebookLogin {
         console.log('statusChangeCallback');
         console.log()
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
+            console.log(response)
             await FacebookLogin.getUserName()
             this.accessToken = response.authResponse.accessToken;
             console.log(this.accessToken);
