@@ -45,8 +45,19 @@ class FacebookLogin {
         }
     }
 
+    static getAcessTokenCallback = () => {
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
+            this.accessToken = response.authResponse.accessToken;
+            console.log(this.accessToken);
+        }
+    }
+
     static checkLoginState() {             // Called when a person is finished with the Login Button. See the onlogin handler
         FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
+    }
+
+    static getAccessToken = () => {
+        FB.getLoginStatus(FacebookLogin.getAcessTokenCallback)
     }
 
     init = () => {
@@ -57,6 +68,7 @@ class FacebookLogin {
             version: this.version           // Use this Graph API version for this call.
         });
 
+        FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
         
         if (userName !== 'undefined') {
@@ -65,5 +77,4 @@ class FacebookLogin {
     }
 }
 
-module.exports = FacebookLogin
 // https://chrome.google.com/webstore/detail/ignore-x-frame-headers/gleekbfjekiniecknbkamfmkohkpodhe
