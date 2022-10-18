@@ -41,7 +41,7 @@ class FacebookLogin {
         }
         else if (response.status === 'not_authorized') {
             console.log('Please log into this app.')
-            FB.logout((response) => document.location.reload() )
+            FB.logout((response) => document.location.reload())
         }
     }
 
@@ -60,11 +60,18 @@ class FacebookLogin {
         FB.getLoginStatus(FacebookLogin.getAcessTokenCallback)
     }
 
-    static login_event = function(response) {
+    static login_event = function (response) {
         console.log("login_event");
         console.log(response.status);
         console.log(response);
-      }
+    }
+
+    static logout_event = function (response) {
+        console.log("login_event");
+        console.log(response.status);
+        console.log(response);
+        FB.logout()
+    }
 
     init = () => {
         FB.init({
@@ -77,7 +84,8 @@ class FacebookLogin {
         FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
         FB.Event.subscribe('auth.login', FacebookLogin.login_event)
-        
+        FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
+
         if (userName !== 'undefined') {
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
         }
