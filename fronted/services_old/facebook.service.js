@@ -67,7 +67,7 @@ class FacebookLogin {
     }
 
     static logout_event = function (response) {
-        console.log("login_event");
+        console.log("logout_event");
         console.log(response.status);
         console.log(response);
         FB.logout()
