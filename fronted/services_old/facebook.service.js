@@ -56,9 +56,15 @@ class FacebookLogin {
         FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
     }
 
-    static getAccessToken = () => {
+    static getAccessToken() {
         FB.getLoginStatus(FacebookLogin.getAcessTokenCallback)
     }
+
+    static login_event = function(response) {
+        console.log("login_event");
+        console.log(response.status);
+        console.log(response);
+      }
 
     init = () => {
         FB.init({
@@ -70,6 +76,7 @@ class FacebookLogin {
 
         FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
+        FB.Event.subscribe('auth.login', FacebookLogin.login_event)
         
         if (userName !== 'undefined') {
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
