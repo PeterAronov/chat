@@ -2,6 +2,7 @@ class FacebookLogin {
     constructor(appId, version) {
         this.appId = appId;
         this.version = version;
+        this.accessToken = null;
     }
 
     static getUserNamePromiseWrapper() {    // we used this wrapper because FB.api does not support promises
@@ -34,6 +35,8 @@ class FacebookLogin {
         console.log()
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
             await FacebookLogin.getUserName()
+            this.accessToken = response.authResponse.accessToken;
+            console.log(this.accessToken);
         }
         else if (response.status === 'not_authorized') {
             console.log('Please log into this app.')
@@ -49,7 +52,7 @@ class FacebookLogin {
         FB.init({
             appId: this.appId,
             cookie: true,                     // Enable cookies to allow the server to access the session.
-            xfbml: false,                     // Parse social plugins on this webpage.
+            xfbml: true,                     // Parse social plugins on this webpage.
             version: this.version           // Use this Graph API version for this call.
         });
 
