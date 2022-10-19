@@ -113,3 +113,13 @@
   
   padding: 10px;
 }
+
+.logout-button {
+  width: 130px;
+  height: 40px;
+  background-image: url(/fronted/img/logout.png);
+  border: none;
+  padding: 7px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
