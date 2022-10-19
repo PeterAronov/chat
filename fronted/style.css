@@ -116,8 +116,9 @@
 
 .logout-button {
   width: 123px;
+  height: 45px;
   background-image: url('./img/logout.png');
-  background-size: contain;
+  background-size: 100% 100%;
   border: none;
   border-radius: 5px;
   cursor: pointer;
