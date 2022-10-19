@@ -25,6 +25,8 @@ class FacebookLogin {
             console.log('Successful login for: ' + userName)
             setLocalStorageUserName(userName)
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+
+            // return userName
         } catch (error) {
             console.log(error)
         }
@@ -70,9 +72,17 @@ class FacebookLogin {
         console.log("logout_event");
         console.log(response.status);
         console.log(response);
-        FB.logout()
+        FB.logout(function(response) {
+            location.reload();
+        })
     }
 
+    static logout() {
+        FB.logout(function(response) {
+            location.reload();
+        })
+    }
+    
     init = () => {
         FB.init({
             appId: this.appId,
