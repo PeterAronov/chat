@@ -115,12 +115,6 @@
 }
 
 .logout-button {
-  width: 123px;
-  height: 40px;
   background-image: url(/fronted/img/logout.png) no-repeat;
   background-size: contain;
-  border: none;
-  padding: 7px 14px;
-  border-radius: 5px;
-  cursor: pointer;
 }
