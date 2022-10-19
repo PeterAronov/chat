@@ -116,11 +116,9 @@
 
 .logout-button {
   width: 123px;
-  height: 40px;
   background-image: url('./img/logout.png');
   background-size: contain;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  overflow: hidden;
 }

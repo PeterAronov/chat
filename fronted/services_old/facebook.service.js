@@ -94,7 +94,7 @@ class FacebookLogin {
         FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
         FB.Event.subscribe('auth.login', FacebookLogin.login_event)
-        FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
+        //FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
 
         if (userName !== 'undefined') {
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
