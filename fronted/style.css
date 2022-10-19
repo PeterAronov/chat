@@ -115,6 +115,6 @@
 }
 
 .logout-button {
-  background-image: url(/fronted/img/logout.png) no-repeat;
+  background-image: url(/fronted/img/logout.png) !important;
   background-size: contain;
 }
