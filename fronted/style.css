@@ -120,7 +120,7 @@
   background-image: url('./img/logout.png');
   background-size: contain;
   border: none;
-  padding: 7px 14px;
   border-radius: 5px;
   cursor: pointer;
+  overflow: hidden;
 }
