@@ -81,6 +81,8 @@ class FacebookLogin {
         FB.logout(function(response) {
             location.reload();
         })
+
+        setLocalStorageUserName('undefined')
     }
     
     init = () => {
