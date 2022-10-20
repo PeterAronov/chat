@@ -68,7 +68,7 @@ class FacebookLogin {
         console.log(response);
         const logoutButton = document.getElementById("logout-button")
         logoutButton.style.display = "none"
-        const loginButton = document.getElementById("login-button")
+        const loginButton = document.getElementById("login-chat2")
         loginButton.style.display = "block"
     }
 
@@ -86,7 +86,7 @@ class FacebookLogin {
             setLocalStorageUserName('undefined')
             const logoutButton = document.getElementById("logout-button")
             logoutButton.style.display = "block"
-            const loginButton = document.getElementById("login-button")
+            const loginButton = document.getElementById("login-chat2")
             loginButton.style.display = "none"
             location.reload();
         })
