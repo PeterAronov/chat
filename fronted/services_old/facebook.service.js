@@ -70,6 +70,8 @@ class FacebookLogin {
         logoutButton.style.display = "none"
         const loginButton = document.getElementsByClassName('fb-login-button')[0]
         loginButton.style.display = "block"
+        console.log(loginButton)
+        console.log(logoutButton)
     }
 
     static logout_event = function (response) {
@@ -91,6 +93,8 @@ class FacebookLogin {
         logoutButton.style.display = "block"
         const loginButton = document.getElementsByClassName('fb-login-button')[0]
         loginButton.style.display = "none"
+        console.log(loginButton)
+        console.log(logoutButton)
     }
     
     init = () => {
@@ -111,6 +115,7 @@ class FacebookLogin {
         }
         else {
             const loginButton = document.getElementsByClassName('fb-login-button')[0]
+            console.log(loginButton)
             loginButton.style.display = "block"
         }
     }
