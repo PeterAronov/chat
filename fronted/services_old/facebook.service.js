@@ -68,7 +68,7 @@ class FacebookLogin {
         console.log(response);
         const logoutButton = document.getElementById("logout-button")
         logoutButton.style.display = "none"
-        const loginButton = document.getElementById("login-chat2")
+        const loginButton = document.getElementsByClassName('fb-login-button')[0]
         loginButton.style.display = "block"
     }
 
@@ -83,13 +83,14 @@ class FacebookLogin {
 
     static logout() {
         FB.logout(function(response) {
-            setLocalStorageUserName('undefined')
-            const logoutButton = document.getElementById("logout-button")
-            logoutButton.style.display = "block"
-            const loginButton = document.getElementById("login-chat2")
-            loginButton.style.display = "none"
             location.reload();
         })
+
+        setLocalStorageUserName('undefined')
+        const logoutButton = document.getElementById("logout-button")
+        logoutButton.style.display = "block"
+        const loginButton = document.getElementsByClassName('fb-login-button')[0]
+        loginButton.style.display = "none"
     }
     
     init = () => {
@@ -109,7 +110,7 @@ class FacebookLogin {
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
         }
         else {
-            const loginButton = document.getElementById("login-chat2")
+            const loginButton = document.getElementsByClassName('fb-login-button')[0]
             loginButton.style.display = "block"
         }
     }
