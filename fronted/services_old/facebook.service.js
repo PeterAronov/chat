@@ -36,6 +36,7 @@ class FacebookLogin {
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
             await FacebookLogin.getUserName()
             this.accessToken = response.authResponse.accessToken;
+            console.log("Peter accessToken: " + this.accessToken + " + reload")
             location.reload()
         }
         else if (response.status === 'not_authorized') {
@@ -59,18 +60,12 @@ class FacebookLogin {
     }
 
     static logout() {
-        console.log("Peter logout")
+        console.log("Peter logout 1")
         FB.logout(function(response) {
+            console.log("Peter logout response")
             location.reload();
         })
-        setLocalStorageUserName('undefined')
-    }
-
-    static logout_event = () => {
-        console.log("Peter logout_event")
-        FB.logout(function(response) {
-            location.reload();
-        })
+        console.log("Peter logout 2")
         setLocalStorageUserName('undefined')
     }
     
@@ -84,8 +79,6 @@ class FacebookLogin {
 
         FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
-        //FB.Event.subscribe('auth.login', FacebookLogin.login_event)
-        FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
 
         if (userName !== 'undefined') {
             // const logoutButton = document.getElementById("logout")
