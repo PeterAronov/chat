@@ -65,6 +65,14 @@ class FacebookLogin {
         })
         setLocalStorageUserName('undefined')
     }
+
+    static logout_event = () => {
+        console.log("Peter logout_event")
+        FB.logout(function(response) {
+            location.reload();
+        })
+        setLocalStorageUserName('undefined')
+    }
     
     init = () => {
         FB.init({
@@ -77,7 +85,7 @@ class FacebookLogin {
         FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
         //FB.Event.subscribe('auth.login', FacebookLogin.login_event)
-        //FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
+        FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
 
         if (userName !== 'undefined') {
             // const logoutButton = document.getElementById("logout")
