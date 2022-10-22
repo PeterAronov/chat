@@ -62,7 +62,7 @@ class FacebookLogin {
     static logout() {
         console.log("Peter logout 1")
         FB.logout(function(response) {
-            console.log("Peter logout response")
+            console.log("Peter logout response + response.status: " + response.status)
             location.reload();
         })
         console.log("Peter logout 2")
