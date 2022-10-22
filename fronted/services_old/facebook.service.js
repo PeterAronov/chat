@@ -61,8 +61,8 @@ class FacebookLogin {
     }
 
     static logout() {
-        setLocalStorageUserName('undefined')
         FB.logout(function(response) {
+            setLocalStorageUserName('undefined')
             location.reload();
         })
         console.log(loginButton)
