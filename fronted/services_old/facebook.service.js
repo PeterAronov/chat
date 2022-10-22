@@ -83,17 +83,17 @@ class FacebookLogin {
         //FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
 
         if (userName !== 'undefined') {
-            const logoutButton = document.getElementById("logout")
-            logoutButton.style.display = "none"
-            const loginButton = document.getElementsByClassName('fb-login-button')[0]
-            loginButton.style.display = "block"
+            // const logoutButton = document.getElementById("logout")
+            // logoutButton.style.display = "none"
+            // const loginButton = document.getElementsByClassName('fb-login-button')[0]
+            // loginButton.style.display = "block"
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
         }
         else {
-            const logoutButton = document.getElementById("logout")
-            logoutButton.style.display = "block"
-            const loginButton = document.getElementsByClassName('fb-login-button')[0]
-            loginButton.style.display = "none"
+            // const logoutButton = document.getElementById("logout")
+            // logoutButton.style.display = "block"
+            // const loginButton = document.getElementsByClassName('fb-login-button')[0]
+            // loginButton.style.display = "none"
         }
     }
 }
