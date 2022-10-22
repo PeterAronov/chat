@@ -71,17 +71,10 @@ class FacebookLogin {
     }
 
     static logout() {
+        setLocalStorageUserName('undefined')
         FB.logout(function(response) {
             location.reload();
         })
-
-        setLocalStorageUserName('undefined')
-        const logoutButton = document.getElementById("logout")
-        logoutButton.style.display = "none"
-        const loginButton = document.getElementsByClassName('fb-login-button')[0]
-        loginButton.style.display = "block"
-        console.log(loginButton)
-        console.log(logoutButton)
     }
     
     init = () => {
