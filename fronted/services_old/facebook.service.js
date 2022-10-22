@@ -108,16 +108,16 @@ class FacebookLogin {
         if (userName !== 'undefined') {
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
             const logoutButton = document.getElementById("logout")
-            logoutButton.style.display = "none"
+            logoutButton.style.display = "block"
             const loginButton = document.getElementsByClassName('fb-login-button')[0]
-            loginButton.style.display = "block"
+            loginButton.style.display = "none"
         }
         else {
             const loginButton = document.getElementsByClassName('fb-login-button')[0]
             console.log(loginButton)
-            loginButton.style.display = "none"
+            loginButton.style.display = "block"
             const logoutButton = document.getElementById("logout")
-            logoutButton.style.display = "block"
+            logoutButton.style.display = "none"
         }
     }
 }
