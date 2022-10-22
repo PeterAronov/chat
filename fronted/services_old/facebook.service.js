@@ -22,8 +22,8 @@ class FacebookLogin {
 
         try {
             const userName = await FacebookLogin.getUserNamePromiseWrapper()
-            console.log('Successful login for: ' + userName)
             setLocalStorageUserName(userName)
+            console.log('Successful login for: ' + userName)
             // return userName
         } catch (error) {
             console.log(error)
@@ -32,7 +32,6 @@ class FacebookLogin {
 
     static statusChangeCallback = async (response) => {
         console.log('statusChangeCallback');
-        console.log()
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
             await FacebookLogin.getUserName()
             this.accessToken = response.authResponse.accessToken;
@@ -45,6 +44,7 @@ class FacebookLogin {
     }
 
     static getAcessTokenCallback = (response) => {
+        console.log("Peter getAcessTokenCallback")
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
             console.log("Peter getAcessTokenCallback accessToken: " + response.authResponse.accessToken)
             this.accessToken = response.authResponse.accessToken;
@@ -62,14 +62,14 @@ class FacebookLogin {
 
     static logout() {
         console.log("Peter logout 1, access token: " + this.accessToken)
-        FB.logout(function(response) {
+        FB.logout(function (response) {
             console.log("Peter logout response + response.status: " + response.status)
             location.reload();
         })
         console.log("Peter logout 2")
         setLocalStorageUserName('undefined')
     }
-    
+
     init = () => {
         FB.init({
             appId: this.appId,
