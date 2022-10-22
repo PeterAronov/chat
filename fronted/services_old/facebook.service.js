@@ -64,7 +64,23 @@ class FacebookLogin {
 
     static login_event = function (response) {
         console.log("login_event");
-        location.reload();
+        console.log(response.status);
+        console.log(response);
+        const logoutButton = document.getElementById("logout")
+        logoutButton.style.display = "none"
+        const loginButton = document.getElementsByClassName('fb-login-button')[0]
+        loginButton.style.display = "block"
+        console.log(loginButton)
+        console.log(logoutButton)
+    }
+
+    static logout_event = function (response) {
+        console.log("logout_event");
+        console.log(response.status);
+        console.log(response);
+        FB.logout(function(response) {
+            location.reload();
+        })
     }
 
     static logout() {
@@ -87,6 +103,7 @@ class FacebookLogin {
         FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
         FB.Event.subscribe('auth.login', FacebookLogin.login_event)
+        //FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
 
         if (userName !== 'undefined') {
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
