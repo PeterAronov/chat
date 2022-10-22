@@ -24,8 +24,6 @@ class FacebookLogin {
             const userName = await FacebookLogin.getUserNamePromiseWrapper()
             console.log('Successful login for: ' + userName)
             setLocalStorageUserName(userName)
-            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
-
             // return userName
         } catch (error) {
             console.log(error)
@@ -39,7 +37,7 @@ class FacebookLogin {
             console.log(response)
             await FacebookLogin.getUserName()
             this.accessToken = response.authResponse.accessToken;
-            console.log(this.accessToken);
+            location.reload()
         }
         else if (response.status === 'not_authorized') {
             console.log('Please log into this app.')
@@ -62,27 +60,6 @@ class FacebookLogin {
         FB.getLoginStatus(FacebookLogin.getAcessTokenCallback)
     }
 
-    static login_event = function (response) {
-        console.log("login_event");
-        console.log(response.status);
-        console.log(response);
-        const logoutButton = document.getElementById("logout")
-        logoutButton.style.display = "none"
-        const loginButton = document.getElementsByClassName('fb-login-button')[0]
-        loginButton.style.display = "block"
-        console.log(loginButton)
-        console.log(logoutButton)
-    }
-
-    static logout_event = function (response) {
-        console.log("logout_event");
-        console.log(response.status);
-        console.log(response);
-        FB.logout(function(response) {
-            location.reload();
-        })
-    }
-
     static logout() {
         setLocalStorageUserName('undefined')
         FB.logout(function(response) {
@@ -102,21 +79,21 @@ class FacebookLogin {
 
         FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
-        FB.Event.subscribe('auth.login', FacebookLogin.login_event)
+        //FB.Event.subscribe('auth.login', FacebookLogin.login_event)
         //FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
 
         if (userName !== 'undefined') {
-            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
             const logoutButton = document.getElementById("logout")
             logoutButton.style.display = "none"
             const loginButton = document.getElementsByClassName('fb-login-button')[0]
             loginButton.style.display = "block"
+            initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
         }
         else {
-            const loginButton = document.getElementsByClassName('fb-login-button')[0]
-            loginButton.style.display = "none"
             const logoutButton = document.getElementById("logout")
             logoutButton.style.display = "block"
+            const loginButton = document.getElementsByClassName('fb-login-button')[0]
+            loginButton.style.display = "none"
         }
     }
 }
