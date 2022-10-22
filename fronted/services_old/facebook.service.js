@@ -46,6 +46,7 @@ class FacebookLogin {
 
     static getAcessTokenCallback = (response) => {
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
+            console.log("Peter getAcessTokenCallback accessToken: " + response.authResponse.accessToken)
             this.accessToken = response.authResponse.accessToken;
         }
     }
