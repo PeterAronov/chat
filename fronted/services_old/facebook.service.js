@@ -52,7 +52,7 @@ class FacebookLogin {
 
     static checkLoginState() {             // Called when a person is finished with the Login Button. See the onlogin handler
         FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
-        location.reload()
+        //location.reload()
     }
 
     static getAccessToken() {
