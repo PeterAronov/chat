@@ -48,7 +48,6 @@ class FacebookLogin {
     static getAcessTokenCallback = (response) => {
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
             this.accessToken = response.authResponse.accessToken;
-            console.log(this.accessToken);
         }
     }
 
@@ -62,11 +61,9 @@ class FacebookLogin {
 
     static logout() {
         FB.logout(function(response) {
-            setLocalStorageUserName('undefined')
             location.reload();
         })
-        console.log(loginButton)
-        console.log(logoutButton)
+        setLocalStorageUserName('undefined')
     }
     
     init = () => {
