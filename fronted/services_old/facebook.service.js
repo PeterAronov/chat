@@ -38,7 +38,10 @@ class FacebookLogin {
             console.log(response)
             await FacebookLogin.getUserName()
             this.accessToken = response.authResponse.accessToken;
-            console.log(this.accessToken);
+            const loginButton = document.getElementsByClassName('fb-login-button')[0]
+            loginButton.style.display = "none"
+            const logoutButton = document.getElementById("logout")
+            logoutButton.style.display = "block"
         }
         else if (response.status === 'not_authorized') {
             console.log('Please log into this app.')
