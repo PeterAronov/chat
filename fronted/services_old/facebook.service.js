@@ -37,7 +37,6 @@ class FacebookLogin {
             await FacebookLogin.getUserName()
             this.accessToken = response.authResponse.accessToken;
             console.log("Peter accessToken: " + this.accessToken + " + reload")
-            location.reload()
         }
         else if (response.status === 'not_authorized') {
             console.log('Please log into this app.')
@@ -53,6 +52,7 @@ class FacebookLogin {
 
     static checkLoginState() {             // Called when a person is finished with the Login Button. See the onlogin handler
         FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
+        location.reload()
     }
 
     static getAccessToken() {
