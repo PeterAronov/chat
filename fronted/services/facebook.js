@@ -25,6 +25,7 @@ class FacebookLogin {
             console.log('Successful login for: ' + userName)
             setLocalStorageUserName(userName)
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+            // return userName
         } catch (error) {
             console.log(error)
         }
@@ -34,12 +35,25 @@ class FacebookLogin {
         console.log('statusChangeCallback');
         console.log()
         if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
-            this.accessToken = response.authResponse.accessToken
+            console.log(response)
             await FacebookLogin.getUserName()
+            this.accessToken = response.authResponse.accessToken;
+            const loginButton = document.getElementsByClassName('fb-login-button')[0]
+            loginButton.style.display = "none"
+            const logoutButton = document.getElementById("logout")
+            logoutButton.style.display = "block"
         }
         else if (response.status === 'not_authorized') {
             console.log('Please log into this app.')
-            FB.logout((response) => document.location.reload() )
+            FB.logout((response) => document.location.reload())
+        }
+    }
+
+    static getAcessTokenCallback = (response) => {
+        console.log("getAcessTokenCallback response.status: " + response.status) 
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook. ('connected' / 'not_authorized' / 'unknown')
+            this.accessToken = response.authResponse.accessToken;
+            console.log(this.accessToken);
         }
     }
 
@@ -47,6 +61,17 @@ class FacebookLogin {
         FB.getLoginStatus(FacebookLogin.statusChangeCallback) // getLoginStatus() is called with the callback function
     }
 
+    static getAccessToken() {
+        FB.getLoginStatus(FacebookLogin.getAcessTokenCallback)
+    }
+
+    static logout() {
+        setLocalStorageUserName('undefined')
+        FB.logout(function(response) {
+            location.reload();
+        })
+    }
+    
     init = () => {
         FB.init({
             appId: this.appId,
@@ -55,12 +80,25 @@ class FacebookLogin {
             version: this.version           // Use this Graph API version for this call.
         });
 
+        FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
-        
+
         if (userName !== 'undefined') {
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function
+            const loginButton = document.getElementsByClassName('fb-login-button')[0]
+            loginButton.style.display = "none"
+            const logoutButton = document.getElementById("logout")
+            logoutButton.style.display = "block"
+        }
+        else {
+            const loginButton = document.getElementsByClassName('fb-login-button')[0]
+            loginButton.style.display = "block"
+            const logoutButton = document.getElementById("logout")
+            logoutButton.style.display = "none"
         }
     }
 }
+
+// https://chrome.google.com/webstore/detail/ignore-x-frame-headers/gleekbfjekiniecknbkamfmkohkpodhe
 
 module.exports = FacebookLogin

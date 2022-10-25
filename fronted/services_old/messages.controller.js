@@ -57,7 +57,6 @@ const displayAllMessages = (messagesObjectArray) => {
         divMessageBody.className = 'message-body';
         const dateText = document.createTextNode(new Date(message.createdAt).toLocaleString());
         const bodyText = document.createTextNode(message.name + ': ' + message.text);
-        const IdText = document.createTextNode(message._id);
         divMessageTime.appendChild(dateText);
         divMessageBody.appendChild(bodyText);
         addDeleteButton(divMessageBody, message._id);

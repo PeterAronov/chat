@@ -1,8 +1,7 @@
 const Message = require('../models/message');
 
 class MessageService {
-
-    async getAllMessages() {
+    static async getAllMessages() {
         try {
             const messages = await Message.find()
             return messages;
@@ -11,7 +10,7 @@ class MessageService {
         }
     }
 
-    async getSingelMessage(_id) {
+    static async getSingelMessage(_id) {
         try {
             const message = await Message.findById(_id)
 
@@ -29,7 +28,7 @@ class MessageService {
         }
     }
 
-    async createNewMessage(text, name) {
+    static async createNewMessage(text, name) {
         const newMessage = new Message({ text: text, name: name })
 
         try {
@@ -40,13 +39,10 @@ class MessageService {
         }
     }
 
-    async updateMessage(_id, updates) {
+    static async updateMessage(_id, updates) {
         const allowedUpdates = ['text', 'name']
         const keysToUpdate = Object.keys(updates)  // keys returns an array of the keys of the object.
         const isValidOperation = keysToUpdate.every((update) => allowedUpdates.includes(update))
-
-        console.log(keysToUpdate)
-        console.log(isValidOperation)
         
         if (!isValidOperation) {
             throw new Error("Invalid updates")
@@ -71,7 +67,7 @@ class MessageService {
         }
     }
 
-    async deleteMessage(_id) {
+    static async deleteMessage(_id) {
         try {
             const message = await Message.findByIdAndDelete(_id)
 
@@ -90,4 +86,4 @@ class MessageService {
     }
 }
 
-module.exports = new MessageService();
+module.exports = MessageService;

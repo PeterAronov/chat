@@ -1,16 +1,16 @@
 class MessageService {
-    getAllMessages = async () => {
+    static getAllMessages = async () => {
         try {
             const response = await axios.get('/messages');
-            displayAllMessages(response.data); // response.data is an array of object messages
+            return response.data;
         } catch (error) {
             console.error(error);
         }
     }
     
-    const postMessage = async (messageText) => {
+    static postMessage = async (userName, messageText) => {
         const newMessage = {
-            name: getLocalStorageUserName(),
+            name: userName,
             text: messageText
         };
     
@@ -21,7 +21,7 @@ class MessageService {
         }
     }
     
-    const deleteMessage = async (messageId) => {
+    static deleteMessage = async (messageId) => {
         try {
             await axios.delete('/messages/' + messageId);
         } catch (error) {
@@ -30,3 +30,4 @@ class MessageService {
     }
 }
 
+module.exports = MessageService;

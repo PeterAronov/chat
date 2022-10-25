@@ -65,15 +65,6 @@ class FacebookLogin {
         FB.getLoginStatus(FacebookLogin.getAcessTokenCallback)
     }
 
-    static logout_event = function (response) {
-        console.log("logout_event");
-        console.log(response.status);
-        console.log(response);
-        FB.logout(function(response) {
-            location.reload();
-        })
-    }
-
     static logout() {
         setLocalStorageUserName('undefined')
         FB.logout(function(response) {
@@ -91,8 +82,6 @@ class FacebookLogin {
 
         FacebookLogin.getAccessToken()
         const userName = getLocalStorageUserName()
-        //FB.Event.subscribe('auth.login', FacebookLogin.login_event)
-        //FB.Event.subscribe('auth.logout', FacebookLogin.logout_event)
 
         if (userName !== 'undefined') {
             initChatMessagesAfterLogin()  // Init of the messages happens here because FB.api is an async function

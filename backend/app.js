@@ -1,5 +1,4 @@
 const express = require("express");
-const helmet = require('helmet');
 const bodyParser = require("body-parser");
 const path = require("path");
 require('./db/mongoose');
@@ -11,7 +10,6 @@ const forntedFolderPath = path.join(__dirname, '../fronted');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(helmet.frameguard({ action: 'SAMEORIGIN' }));
 
 // unsecured routes
 app.use(express.static(forntedFolderPath))
