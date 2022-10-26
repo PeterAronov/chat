@@ -49,7 +49,7 @@ const displayAllMessages = (messagesObjectArray) => {
         </div>
     </div>
     `
-        messagesNode.append(messageElement);
+        messagesNode.insertAdjacentHTML("beforeend", messageElement);
     });
 }
 
