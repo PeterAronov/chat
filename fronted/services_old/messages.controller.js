@@ -42,14 +42,14 @@ const displayAllMessages = (messagesObjectArray) => {
 
     messagesObjectArray.forEach((message) => {
 
-        const messageElement = document.createElement("div");
-        messageElement.className = "message-container";
-        messageElement.innerHTML = `
-            <div class="message-time">${new Date(message.createdAt).toLocaleString()}</div>
-            <div class="message-body">${message.name}: ${message.text}
-                <span class="deleteMessage" onclick="() => deleteMessage(${message._id})">×</span>
-            </div>
-        `;
+        let messageElement = `
+        <div class="message-container">
+        <div class="message-time">${new Date(message.createdAt).toLocaleString()}</div>
+        <div class="message-body">${message.name}: ${message.text}
+            <span class="deleteMessage" onclick="() => deleteMessage(${message._id})">×</span>
+        </div>
+    </div>
+    `
         messagesNode.insertAdjacentHTML("beforeend", messageElement);
     });
 }
