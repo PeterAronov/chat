@@ -54,6 +54,15 @@ const displayAllMessages = (messagesObjectArray) => {
     });
 }
 
+const addDeleteButton = (divMessageContainer, messageId) => {
+    let span = document.createElement("SPAN");
+    let txt = document.createTextNode("\u00D7"); /* \u00D7 stands for X */
+    span.className = "deleteMessage";
+    span.appendChild(txt);
+    divMessageContainer.appendChild(span);// adds child to li
+    span.onclick = () => deleteMessage(messageId) // writing deleteMessage(messageId) will call the CB immediately
+}
+
 const addNewMessage = () => {
     const messageText = document.getElementById("new-message").value;
 
