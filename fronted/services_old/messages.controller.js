@@ -32,15 +32,6 @@ const deleteMessage = async (messageId) => {
     }
 }
 
-const addDeleteButton = (divMessageContainer, messageId) => {
-    let span = document.createElement("SPAN");
-    let txt = document.createTextNode("\u00D7"); /* \u00D7 stands for X */
-    span.className = "deleteMessage";
-    span.appendChild(txt);
-    divMessageContainer.appendChild(span);// adds child to li
-    span.onclick = () => deleteMessage(messageId) // writing deleteMessage(messageId) will call the CB immediately
-}
-
 const displayAllMessages = (messagesObjectArray) => {
     const messagesNode = document.getElementById("messages-target");
 
@@ -49,20 +40,16 @@ const displayAllMessages = (messagesObjectArray) => {
     }
 
     messagesObjectArray.forEach((message) => {
-        let divMessageContainer = document.createElement("div");
-        let divMessageTime = document.createElement("div");
-        let divMessageBody = document.createElement("div");
-        divMessageContainer.className = 'message-container';
-        divMessageTime.className = 'message-time';
-        divMessageBody.className = 'message-body';
-        const dateText = document.createTextNode(new Date(message.createdAt).toLocaleString());
-        const bodyText = document.createTextNode(message.name + ': ' + message.text);
-        divMessageTime.appendChild(dateText);
-        divMessageBody.appendChild(bodyText);
-        addDeleteButton(divMessageBody, message._id);
-        divMessageContainer.appendChild(divMessageTime);
-        divMessageContainer.appendChild(divMessageBody);
-        messagesNode.append(divMessageContainer);
+
+        let messageElement = `
+        <div class="message-container">
+        <div class="message-time">${new Date(message.createdAt).toLocaleString()}</div>
+        <div class="message-body">${message.name}: ${message.text}
+            <span class="deleteMessage" onclick="deleteMessage(${message._id})">×</span>
+        </div>
+    </div>
+    `
+        messagesNode.append(messageElement);
     });
 }
 
