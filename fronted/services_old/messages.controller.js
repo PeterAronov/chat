@@ -45,7 +45,7 @@ const displayAllMessages = (messagesObjectArray) => {
         <div class="message-container">
         <div class="message-time">${new Date(message.createdAt).toLocaleString()}</div>
         <div class="message-body">${message.name}: ${message.text}
-            <span class="deleteMessage" onclick="deleteMessage(${message._id})">×</span>
+            <span class="deleteMessage" onclick='deleteMessage(${message._id})'>×</span>
         </div>
     </div>
     `
