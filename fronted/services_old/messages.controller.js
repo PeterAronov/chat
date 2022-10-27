@@ -24,10 +24,10 @@ const postMessage = async (messageText) => {
     }
 }
 
-const deleteMessage = async () => {
-    console.log("Peter: deleteMessage() called")
+const deleteMessage = async (messaeId) => {
+    console.log(messageId);
     try {
-        await axios.delete('/messages/' + 5);
+        await axios.delete('/messages/' + messageId);
     } catch (error) {
         console.log(error);
     }
@@ -46,7 +46,7 @@ const displayAllMessages = (messagesObjectArray) => {
         <div class="message-container">
         <div class="message-time">${new Date(message.createdAt).toLocaleString()}</div>
         <div class="message-body">${message.name}: ${message.text}
-            <span class="deleteMessage" onclick="deleteMessage()">×</span>
+            <span class="deleteMessage" onclick="deleteMessage('${message._id}')">×</span>
         </div>
     </div>
     `
