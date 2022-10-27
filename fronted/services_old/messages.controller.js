@@ -25,7 +25,7 @@ const postMessage = async (messageText) => {
 }
 
 const deleteMessage = async () => {
-    console.log("Peter: deleteMessage() called")");
+    console.log("Peter: deleteMessage() called")
     try {
         await axios.delete('/messages/' + 5);
     } catch (error) {
