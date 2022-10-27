@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 // unsecured routes
 app.use(express.static(forntedFolderPath))
+
 // login route
 //app.use(authMidlware) 
 // secured routes
@@ -20,3 +21,10 @@ app.use(messagesRoute)// Every request for /messages rout will go to ./routes/me
 app.use(errorHandler)
 
 module.exports = app;
+
+function authMidlware(req, res, next) {
+   if(Facebook.isAuthenticated())
+   {}
+    const data = jwt.verify(token, process.env.JWT_SECRET)
+    next()
+}
