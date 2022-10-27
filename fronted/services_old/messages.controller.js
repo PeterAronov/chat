@@ -25,6 +25,7 @@ const postMessage = async (messageText) => {
 }
 
 const deleteMessage = async (messageId) => {
+    console.log(messageId);
     try {
         await axios.delete('/messages/' + messageId);
     } catch (error) {
