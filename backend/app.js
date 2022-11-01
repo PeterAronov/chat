@@ -19,6 +19,10 @@ app.use(bodyParser.json());
 // unsecured routes
 app.use(express.static(forntedFolderPath))
 
+app.get('', (req, res) => {
+    res.render('home')
+})
+
 // secured routes
 app.use(messagesRoute)// Every request for /messages rout will go to ./routes/messages-routes
 app.use(errorHandler)
