@@ -4,12 +4,11 @@ const path = require("path");
 require('./db/mongoose');
 const errorHandler = require('./middelwares/error.handler')
 const messagesRoute = require('./api/messages/v1/routes/message');
-const loginRoute = require('./api/auth/facebook/v1/routes/facebook');
-
+// const loginRoute = require('./api/auth/facebook/v1/routes/facebook');
 
 const app = express();
 const forntedFolderPath = path.join(__dirname, '../fronted');
-const viewsFolderPath = path.join(__dirname, '../fronted/views');
+// const viewsFolderPath = path.join(__dirname, '../fronted/views');
 
 // app.set('view engine', 'html');
 // app.set('views', viewsFolderPath);
