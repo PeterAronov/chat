@@ -8,7 +8,7 @@ const messagesRoute = require('./api/messages/v1/routes/message');
 
 const app = express();
 const forntedFolderPath = path.join(__dirname, '../fronted');
-// const viewsFolderPath = path.join(__dirname, '../fronted/views');
+const viewsFolderPath = path.join(__dirname, '../fronted/views');
 
 app.set('view engine', 'html');
 app.set('views', viewsFolderPath);
