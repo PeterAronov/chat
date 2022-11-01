@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 // unsecured routes
 app.use(express.static(forntedFolderPath))
 
-app.get('', (req, res) => {
+app.get('/', (req, res) => {
     res.render('home')
 })
 
