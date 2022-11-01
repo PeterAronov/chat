@@ -11,7 +11,7 @@ const app = express();
 const forntedFolderPath = path.join(__dirname, '../fronted');
 const viewsFolderPath = path.join(__dirname, '../fronted/views');
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'html');
 app.set('views', viewsFolderPath);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
