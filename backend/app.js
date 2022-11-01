@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 app.use(express.static(forntedFolderPath))
 
 app.get('/', (req, res) => {
+    console.log('home.html');
      res.render('home')
  })
 
