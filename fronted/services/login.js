@@ -5,5 +5,3 @@ class LoginService {
     }
 }
 
-module.exports = LoginService;
-

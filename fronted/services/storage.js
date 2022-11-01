@@ -14,5 +14,3 @@ class LocalStorageService {
     }
 }
 
-module.exports = LocalStorageService
-

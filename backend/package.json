@@ -13,11 +13,16 @@
   "author": "Peter Aronov",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "http-status": "^1.5.2",
     "mongodb": "^4.8.1",
     "mongoose": "^6.5.2",
+    "passport": "^0.6.0",
+    "passport-facebook": "^3.0.0",
+    "query-string": "^7.1.1",
     "uuid": "^8.3.2",
     "validator": "^13.7.0"
   },
