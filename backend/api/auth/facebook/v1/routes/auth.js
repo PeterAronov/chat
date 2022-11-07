@@ -25,7 +25,7 @@ router.get('/auth/facebook', (req, res) => {   // auth with facebook
 router.get('/auth/facebook/callback', (req, res) => {   // auth with facebook
     console.log('facebook');
     // handle with passport
-    res.send('logging in with Facebook');
+    res.render('home', { name: 'Peter the Programmer' });
 });
 
 module.exports = router;
