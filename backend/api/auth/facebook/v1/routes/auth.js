@@ -16,12 +16,22 @@ router.get('/auth/logout', (req, res) => {   // Auth logout
     res.send('logging out');
 });
 
-router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook', passport.authenticate('facebook',
+    { successRedirect: '/auth/facebook/callback', failureRedirect: '/auth/error' }
+))
 
-router.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, res) => {   // auth with facebook
-    console.log('facebook');
-    // handle with passport
-    res.render('home', { name: 'Peter the Programmer' });
+router.get('/auth/facebook/callback', passport.authenticate('facebook',
+    { successRedirect: '/auth/facebook/success', failureRedirect: '/auth/error' }
+));
+
+router.get('/auth/error', (req, res) => {   // auth with facebook
+    console.log('error');
+    res.send('error logging in');
+});
+
+router.get('/auth/facebook/success', (req, res) => {   // auth with facebook
+    console.log('success');
+    res.send('success logging in');
 });
 
 module.exports = router;
