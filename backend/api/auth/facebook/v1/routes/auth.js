@@ -22,4 +22,10 @@ router.get('/auth/facebook', (req, res) => {   // auth with facebook
     res.send('logging in with Facebook');
 });
 
+router.get('/auth/facebook/callback', (req, res) => {   // auth with facebook
+    console.log('facebook');
+    // handle with passport
+    res.send('logging in with Facebook');
+});
+
 module.exports = router;
