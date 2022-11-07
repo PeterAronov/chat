@@ -1,4 +1,4 @@
-const FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookStrategy = require('passport-facebook');
 const chatUser = require('../api/auth/facebook/v1/models/user');
 
 console.log('passport setup');
@@ -22,9 +22,9 @@ module.exports = function (passport) {
     console.log(process.env.FACEBOOK_CALLBACK_URL);
 
     passport.use(new FacebookStrategy({
-        clientID: '614397593554229',
-        clientSecret: '018e3e3b9b312009ef7462aa97b6fddc',
-        callbackURL: 'https://dashboard.heroku.com/apps/chat-app-v1-peter/auth/facebook/callback',
+        clientID: process.env.FACEBOOK_APP_ID,
+        clientSecret: process.env.FACEBOOK_APP_SECRET,
+        callbackURL: process.env.FACEBOOK_CALLBACK_URL,
         profileFields: ['id', 'displayName', 'photos', 'email']
     },
         (accessToken, refreshToken, profile, done) => { // profile is the user profile object we get from facebook it contains the user information like name, email, profile picture etc.
@@ -35,6 +35,7 @@ module.exports = function (passport) {
                 if (!err && user !== null) {
                     return done(null, user);
                 } else {
+                    console.log("profile ", profile);
                     const newChatUser = new chatUser({
                         profileId: profile.id,
                         fullName: profile.displayName,
