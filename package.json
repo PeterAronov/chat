@@ -1,5 +1,5 @@
 {
-    "comment": "heroku login(opens the web to login) | git push heroku HEAD:master | heroku config:set NODE_ENV=production | in scripts under start specify the file running the server",
+    "comment": "heroku login(opens the web to login) | git push heroku HEAD:master | heroku config:set NODE_ENV=production | in scripts under start specify the file running the server | heroku logs --tail",
     "name": "chat",
     "version": "1.0.0",
     "description": "Chat App",

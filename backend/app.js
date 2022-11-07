@@ -7,6 +7,7 @@ require('./db/mongoose');
 const errorHandler = require('./middelwares/error.handler')
 const messagesRoute = require('./api/messages/v1/routes/message');
 const authRoute = require('./api/auth/facebook/v1/routes/auth');
+require('./setups/passport')(passport)
 
 const app = express();
 const forntedFolderPath = path.join(__dirname, '../fronted');
@@ -21,7 +22,6 @@ app.use(session({ // when a request ends there is not communication between the 
     secret: process.env.SESSION_SECRET
 })); // We can find the session inside application tab in the browser
 
-require('./setups/passport')(passport)
 app.use(passport.initialize());
 app.use(passport.session());
 
