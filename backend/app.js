@@ -21,7 +21,7 @@ app.use(session({ // when a request ends there is not communication between the 
     secret: process.env.SESSION_SECRET
 })); // We can find the session inside application tab in the browser
 
-require('./setups/passport')(passport)
+//require('./setups/passport')(passport)
 app.use(passport.initialize());
 app.use(passport.session());
 
