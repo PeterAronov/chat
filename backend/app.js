@@ -30,8 +30,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(forntedFolderPath))
 
-// app.get('/', passport.authenticate('facebook'), (req, res) => {
-app.get('/',(req, res) => { 
+app.get('/', passport.authenticate('facebook'), (req, res) => {
     console.log('home.ejs');
     res.render('home', { name: 'Programmer' });
 })
