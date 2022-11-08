@@ -1,4 +1,4 @@
-const FacebookStrategy = require('passport-facebook')
+const FacebookStrategy = require('passport-facebook').Strategy;
 const chatUser = require('../api/auth/facebook/v1/models/user');
 
 console.log('passport setup');
