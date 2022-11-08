@@ -17,7 +17,7 @@ router.get('/auth/logout', (req, res) => {   // Auth logout
 });
 
 router.get('/auth/facebook', passport.authenticate('facebook', {
-    scope:['email']
+    scope:['public_profile', 'email']
   }));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook',

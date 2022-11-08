@@ -7,8 +7,7 @@ require('./db/mongoose');
 const errorHandler = require('./middelwares/error.handler')
 const messagesRoute = require('./api/messages/v1/routes/message');
 const authRoute = require('./api/auth/facebook/v1/routes/auth');
-//require('./setups/passport')(passport)
-const FacebookStrategy = require('passport-facebook').Strategy;
+require('./setups/passport')(passport)
 
 const app = express();
 const forntedFolderPath = path.join(__dirname, '../fronted');
@@ -17,31 +16,14 @@ const viewsFolderPath = path.join(__dirname, '../fronted/views');
 app.set('view engine', 'ejs');
 app.set('views', viewsFolderPath); // Setting the view doesn't mean index.html will be rendered, it means that the view engine will look for the index.ejs file in the views folder.
 
-app.use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: 'SECRET'
-}));
+app.use(session({ // when a request ends there is not communication between the server and the client, we can save data inside req.session object and it will be available in the next request.
+    resave: false, // means that we don't want to save the session if nothing is modified
+    saveUninitialized: true, // means that we don't want to create a session until something is stored
+    secret: process.env.SESSION_SECRET
+})); // We can find the session inside application tab in the browser
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-passport.serializeUser(function (user, cb) {
-    cb(null, user);
-});
-
-passport.deserializeUser(function (obj, cb) {
-    cb(null, obj);
-});
-
-passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: process.env.FACEBOOK_CALLBACK_URL
-}, function (accessToken, refreshToken, profile, done) {
-    return done(null, profile);
-}
-));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
