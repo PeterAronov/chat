@@ -7,7 +7,7 @@ require('./db/mongoose');
 const errorHandler = require('./middelwares/error.handler')
 const messagesRoute = require('./api/messages/v1/routes/message');
 const authRoute = require('./api/auth/facebook/v1/routes/auth');
-require('./setups/passport')(passport)
+//require('./setups/passport')(passport)
 
 const app = express();
 const forntedFolderPath = path.join(__dirname, '../fronted');
@@ -16,14 +16,27 @@ const viewsFolderPath = path.join(__dirname, '../fronted/views');
 app.set('view engine', 'ejs');
 app.set('views', viewsFolderPath); // Setting the view doesn't mean index.html will be rendered, it means that the view engine will look for the index.ejs file in the views folder.
 
-app.use(session({ // when a request ends there is not communication between the server and the client, we can save data inside req.session object and it will be available in the next request.
-    resave: false, // means that we don't want to save the session if nothing is modified
-    saveUninitialized: true, // means that we don't want to create a session until something is stored
-    secret: process.env.SESSION_SECRET
-})); // We can find the session inside application tab in the browser
+const FacebookStrategy = require('passport-facebook').Strategy
 
-app.use(passport.initialize());
-app.use(passport.session());
+passport.use(
+    new FacebookStrategy({
+        // options for google strategy
+        clientID: '614397593554229',
+        clientSecret: '018e3e3b9b312009ef7462aa97b6fddc',
+        callbackURL: 'https://dashboard.heroku.com/apps/chat-app-v1-peter/auth/facebook/callback'
+    }, () => {
+        // passport callback function
+    })
+);
+
+// app.use(session({ // when a request ends there is not communication between the server and the client, we can save data inside req.session object and it will be available in the next request.
+//     resave: false, // means that we don't want to save the session if nothing is modified
+//     saveUninitialized: true, // means that we don't want to create a session until something is stored
+//     secret: process.env.SESSION_SECRET
+// })); // We can find the session inside application tab in the browser
+
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
