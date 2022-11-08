@@ -28,30 +28,30 @@ module.exports = function (passport) {
         profileFields: ['id', 'displayName', 'photos', 'email']
     },
         (accessToken, refreshToken, profile, done) => { // profile is the user profile object we get from facebook it contains the user information like name, email, profile picture etc.
-            chatUser.findOne({ profileId: profile.id }, (err, user) => {
-                if (err) {
-                    return done(err); // done(null, false, { message: 'Something went wrong with Facebook' });
-                }
-                if (!err && user !== null) {
-                    return done(null, user);
-                } else {
-                    console.log("profile ", profile);
-                    const newChatUser = new chatUser({
-                        profileId: profile.id,
-                        fullName: profile.displayName,
-                        profilePic: profile.photos[0].value || ''
-                    })
+            // chatUser.findOne({ profileId: profile.id }, (err, user) => {
+            //     if (err) {
+            //         return done(err); // done(null, false, { message: 'Something went wrong with Facebook' });
+            //     }
+            //     if (!err && user !== null) {
+            //         return done(null, user);
+            //     } else {
+            //         console.log("profile ", profile);
+            //         const newChatUser = new chatUser({
+            //             profileId: profile.id,
+            //             fullName: profile.displayName,
+            //             profilePic: profile.photos[0].value || ''
+            //         })
 
-                    newChatUser.save((err) => {
-                        if (err) {
-                            throw new Error("Error saving user"); // done(null, false, { message: 'Error saving user' });
-                        } else {
-                            console.log("Saving user ...");
-                            done(null, user);
-                        }
-                    })
-                }
-            })
+            //         newChatUser.save((err) => {
+            //             if (err) {
+            //                 throw new Error("Error saving user"); // done(null, false, { message: 'Error saving user' });
+            //             } else {
+            //                 console.log("Saving user ...");
+            //                 done(null, user);
+            //             }
+            //         })
+            //     }
+            // })
         })
     )
 }
