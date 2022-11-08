@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(forntedFolderPath))
-
+console.log(passport)
 app.get('/', (req, res) => {
     console.log('home.ejs');
     res.render('home', { name: 'Programmer' });
