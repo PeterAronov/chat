@@ -21,7 +21,7 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-    profileFields: ['id', 'displayName', 'photos', 'email']
+    profileFields: ['id', 'displayName']
 }, () => {}))
 
 app.use(session({ // when a request ends there is not communication between the server and the client, we can save data inside req.session object and it will be available in the next request.
