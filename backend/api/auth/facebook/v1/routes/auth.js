@@ -16,12 +16,9 @@ router.get('/auth/logout', (req, res) => {   // Auth logout
     res.send('logging out');
 });
 
-router.get('/auth/facebook', passport.authenticate('facebook',
-    { successRedirect: '/auth/facebook/callback', failureRedirect: '/auth/error' } , (req, res) => {
-        console.log('facebook');
-        res.send('logging in with facebook');
-    }
-))
+router.get('/auth/facebook', passport.authenticate('facebook', {
+    scope:['email']
+  }));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook',
     { successRedirect: '/auth/facebook/success', failureRedirect: '/auth/error' } , (req, res) => {
