@@ -6,15 +6,15 @@ console.log('passport setup');
 module.exports = function (passport) {
 
     console.log('passport setup');
-    passport.serializeUser((user, done) => { // req.session.passport.user = {id: '..'} Save praticular user reference in the session
-        done(null, user._id) // We are using sessions in our application, when we call serializeUser, passport will store the user id to the session.
-    })
-    console.log('passport setup 2');
-    passport.deserializeUser((id, done) => { // When ever we want to access any user information from the session, we will use the user id stored in the session to get the user information from the database.
-        chatUser.findById(id).then((user) => { // user object attaches to the request as req.user
-            done(null, user)
-        })
-    })
+    // passport.serializeUser((user, done) => { // req.session.passport.user = {id: '..'} Save praticular user reference in the session
+    //     done(null, user._id) // We are using sessions in our application, when we call serializeUser, passport will store the user id to the session.
+    // })
+    // console.log('passport setup 2');
+    // passport.deserializeUser((id, done) => { // When ever we want to access any user information from the session, we will use the user id stored in the session to get the user information from the database.
+    //     chatUser.findById(id).then((user) => { // user object attaches to the request as req.user
+    //         done(null, user)
+    //     })
+    // })
     console.log('passport setup 3');
 
     console.log(process.env.FACEBOOK_APP_ID);
