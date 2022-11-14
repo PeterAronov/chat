@@ -5,6 +5,7 @@
   body {
     width: 100%;/* The width of the all body will be 100% of the screen */
     font-family: 'Open Sans', sans-serif; /* The font of all the page will be Open Sans, if it doesn't work use sans-serif */
+    text-align: center;
     color: #333;
     margin: 0px;/* The header won't have any margin */
   }
@@ -114,12 +115,6 @@
   padding: 10px;
 }
 
-.logout-button {
-  width: 123px;
-  height: 39px;
-  background-image: url('./img/logout.png');
-  background-size: 100% 100%;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.messages {
+  text-align: left;
 }

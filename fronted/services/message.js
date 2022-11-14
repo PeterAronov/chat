@@ -13,7 +13,7 @@ class MessageService {
             name: userName,
             text: messageText
         };
-    
+        
         try {
             await axios.post('/messages/', newMessage);
         } catch (error) {
